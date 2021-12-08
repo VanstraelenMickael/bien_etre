@@ -5,11 +5,56 @@
         <title>{% block title %}Bien-Être{% endblock %}</title>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
         {% block stylesheets %}
-            
+            <link rel="stylesheet" href="{{asset('css/main.css')}}">
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block header %}
+        <div class="fluid-container">
+            <div class="header">
+                <div class="logo"><img src="{{asset('img/logo.png')}}" alt="Bien-Être"></div>
+                <div class="header_banner">
+                    <span>Annuaire</span>
+                    <span>Bien-Être</span>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+        <div class="container">
+        <div class="row">
+        {% block aside %}
+        <div class="col-12 col-xs-12 col-md-4 col-lg-3 col-xl-3">
+        <aside>
+            <div class="wrapper" id="connexion">
+                <h2>Se connecter</h2>
+                <div class="wrapper_content">
+                    <form>
+                    <div class="form-group">
+                        <label>Nom d'utilisateur</label>
+                        <input type="text" class="username form-control"/>
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" class="password form-control"/>
+                    </div>
+                    <div class="form-check flex-around">
+                        <div>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                        <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
+                        </div>
+                        <a href="#">S'inscrire</a>
+                    </div>
+                    <input type="submit" value="Connexion" class="btn_primary"/>
+                    </form>
+                </div>
+            </div>
+        </aside>
+        </div>
+        {% endblock %}
+        {% block body %}
+        {% endblock %}
+        </div>
+        </div>
     </body>
     {% block javascripts %}
         <script src="https://kit.fontawesome.com/34fc05a1ac.js" crossorigin="anonymous"></script>

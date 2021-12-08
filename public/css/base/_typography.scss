@@ -16,5 +16,15 @@
 
 }
 
+@font-face {
+    font-family: 'lobster';
+    src: url('../../font/lobster-regular1-webfont.woff2') format('woff2'),
+         url('../../font/lobster-regular1-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 $text: 'Roboto';
 $title : 'Source Sans Pro';
+$header : 'lobster';

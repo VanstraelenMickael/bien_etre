@@ -1,0 +1,15 @@
+aside{
+    width: 100%;
+}
+
+aside h2{
+    position: relative;
+    background-color: $main-color;
+    padding: 15px 0px;
+    text-align: center;
+    color: $secondary;
+    font-family: $title;
+    text-transform: uppercase;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}

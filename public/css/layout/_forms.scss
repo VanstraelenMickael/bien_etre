@@ -1,0 +1,35 @@
+aside form > div, .form-check{
+    margin-bottom: 15px;
+}
+
+label{
+    margin-bottom: 5px;
+    text-transform : uppercase;
+    font-size: 12px;
+    color: gray;
+}
+
+.form-control:focus {
+    color: #212529;
+    background-color: #fff;
+    border-color: $main-color;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.25rem rgba($main-dark, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba($main-dark, 0.25);
+  }
+
+  .form-check-input:focus {
+    border-color: $main-color;
+    outline: 0;
+    -webkit-box-shadow: 0 0 0 0.25rem rgba($main-dark, 0.25);
+            box-shadow: 0 0 0 0.25rem rgba($main-dark, 0.25);
+  }
+
+  .form-check-input:checked {
+    background-color: $main-dark;
+    border-color: $main-dark;
+  }
+
+  .form-check-label{
+      margin-bottom: 0px;
+  }

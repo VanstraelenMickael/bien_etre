@@ -1,0 +1,32 @@
+.header{
+    margin-top: 25px;
+    @include flex-column-center;
+}
+
+.header .logo img{
+    width: 100px;
+}
+
+.header > *{
+    margin-bottom: 50px;
+}
+
+.header_banner{
+    position: relative;
+    background-image: url('../../img/banner.jpg');
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 375px;
+    @include flex-column-center;
+    box-shadow: inset 0px 0px 100px 500px rgba(0, 0, 0, 0.5);
+    opacity: 0.75;
+}
+
+.header_banner span{
+    opacity: 1;
+    color: $main-color;
+    font-size: 80px;
+    text-shadow: 7px 7px 5px rgba(0, 0, 0, 0.95);
+    font-family: $header;
+}
