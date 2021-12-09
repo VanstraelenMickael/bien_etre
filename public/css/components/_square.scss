@@ -1,0 +1,64 @@
+#square{
+    position: relative;
+    width: 100%;
+    background-color: $main-color;
+    color: white;
+    padding: 20px 20px;
+    margin-bottom: 75px;
+}
+
+#square figure img{
+    width: 80%;
+    height: 80%;
+}
+
+#square figure{
+    position: relative;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+#square figure::after{
+    content:'';
+    position: absolute;
+    top: 0%;
+    left: 10%;
+    width: 80%;
+    height: 100%;
+    background-color: rgba(black, 0.8);
+    opacity: 0.2;
+}
+
+#square .row{
+    margin-top: 30px;
+}
+
+#square .row div{
+    align-items: center;
+}
+
+#square .nom, #square .description{
+    position: absolute;
+    z-index: 1;
+    color: $main-color;
+    @include minititle-size;
+}
+
+#square .description{
+    display: none;
+}
+
+#square figure:hover:after{
+    cursor:pointer;
+    opacity: 0.8;
+}
+
+#square figure:hover .description{
+    display: block;
+}
+
+#square figure:hover .nom{
+    display: none;
+}

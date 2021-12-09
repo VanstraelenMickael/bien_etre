@@ -12393,6 +12393,13 @@ label {
   margin-bottom: 0px;
 }
 
+.form-select:focus {
+  border-color: #38B972;
+  outline: 0;
+  -webkit-box-shadow: 0 0 0 0.25rem rgba(41, 137, 84, 0.25);
+  box-shadow: 0 0 0 0.25rem rgba(41, 137, 84, 0.25);
+}
+
 html {
   position: relative;
   overflow-x: hidden;
@@ -12402,6 +12409,7 @@ html {
 
 body {
   font-family: "Roboto";
+  overflow-x: hidden;
 }
 
 a {
@@ -12484,6 +12492,10 @@ footer, footer a {
 
 .menu {
   padding: 0px 10px;
+}
+
+footer a:hover {
+  color: white;
 }
 
 .header {
@@ -12642,5 +12654,90 @@ aside .categorie a:hover {
 #slider .prev:hover, #slider .next:hover {
   color: #298954;
   cursor: pointer;
+}
+
+#square {
+  position: relative;
+  width: 100%;
+  background-color: #38B972;
+  color: white;
+  padding: 20px 20px;
+  margin-bottom: 75px;
+}
+
+#square figure img {
+  width: 80%;
+  height: 80%;
+}
+
+#square figure {
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin-bottom: 50px;
+}
+
+#square figure::after {
+  content: '';
+  position: absolute;
+  top: 0%;
+  left: 10%;
+  width: 80%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0.2;
+}
+
+#square .row {
+  margin-top: 30px;
+}
+
+#square .row div {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#square .nom, #square .description {
+  position: absolute;
+  z-index: 1;
+  color: #38B972;
+  font-size: 24px;
+}
+
+@media (min-width: 576px) {
+  #square .nom, #square .description {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 1080px) {
+  #square .nom, #square .description {
+    font-size: 12px;
+  }
+}
+
+#square .description {
+  display: none;
+}
+
+#square figure:hover:after {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+#square figure:hover .description {
+  display: block;
+}
+
+#square figure:hover .nom {
+  display: none;
 }
 /*# sourceMappingURL=main.css.map */

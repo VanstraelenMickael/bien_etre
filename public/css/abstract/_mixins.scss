@@ -14,3 +14,13 @@
         font-size: 80px;
     }
 }
+
+@mixin minititle-size{
+    font-size: 24px;
+    @media (min-width: 576px) {
+        font-size: 16px;
+    }
+    @media (min-width: 1080px) {
+        font-size: 12px;
+    }
+}
