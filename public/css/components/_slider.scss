@@ -1,0 +1,24 @@
+#slider{
+    width: 100%;
+    height: 300px;
+    background-color: grey;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#slider .prev, #slider .next{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 5%;
+    font-size: 48px;
+    color: $main-color;
+    background-color: rgba(black, 0.5);
+}
+
+#slider .prev:hover, #slider .next:hover{
+    color: $main-dark;
+    cursor: pointer;
+}

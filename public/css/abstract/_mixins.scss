@@ -4,3 +4,13 @@
     justify-content: center;
     align-items: center;
 }
+
+@mixin header-size{
+    font-size: 50px;
+    @media (min-width: 576px) {
+        font-size: 60px;
+    }
+    @media (min-width: 1080px) {
+        font-size: 80px;
+    }
+}

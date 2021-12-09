@@ -1,4 +1,17 @@
 .wrapper_content{
+    position: relative;
     border: 1px solid $main-color;
-    padding: 10px 20px;
+    padding: 20px 20px;
+    padding-bottom: 50px;
+}
+
+#recherche_content{
+    height: 400px;
+    transition: 0.4s;
+    overflow: hidden;
+}
+
+#recherche_content.wrapper_content_close{
+    height: 0px;
+    padding-bottom: 0px;
 }

@@ -5,4 +5,12 @@
     border-radius: 5px;
     color: $secondary;
     width: 100%;
+    position: relative;
+    transition: 0.4s;
+}
+
+.btn_primary:hover{
+    background-color: $main-dark;
+    border: 1px solid $main-dark;
+    box-shadow: 0px 3px 10px rgba($main-dark, 0.6);
 }
