@@ -21,6 +21,9 @@ class HomeController extends AbstractController
     {
         $repository = $entitymanager->getRepository(CategorieDeServices::class);
         $categories = $repository->findAll();
+        $enAvant = $repository->findBy(
+            array('enAvant' => '1')
+        );
 
         $repository = $entitymanager->getRepository(Prestataire::class);
         $prestataires = $repository->findLatest();
@@ -28,8 +31,7 @@ class HomeController extends AbstractController
         return $this->render('home/index.html.twig', [
             "categories" => $categories,
             "prestataires" => $prestataires,
-            "categorieEnAvant" => $categories[0],
-            
+            "categorieEnAvant" => $enAvant[0]
         ]);
     }
 }
