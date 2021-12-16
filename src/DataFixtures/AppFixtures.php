@@ -2,9 +2,9 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\CategorieDeServices;
 use App\Factory\PrestataireFactory;
 use App\Factory\CategorieDeServicesFactory;
+use App\Factory\ImagesFactory;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
@@ -15,6 +15,7 @@ class AppFixtures extends Fixture
     {
         PrestataireFactory::createMany(10);
         CategorieDeServicesFactory::createMany(10);
+        ImagesFactory::createMany(10);
 
         $manager->flush();
     }

@@ -1,9 +1,14 @@
 aside{
-    position : absolute;
+    position : fixed;
+    top: 0px;
     right: -100%;
-    width: 100%;
+    width: 0%;
     margin-bottom: 100px;
     background-color: white;
+    overflow-y:scroll;
+    overflow-x:hidden;
+    transition: 0.4s;
+    z-index: 65;
 }
 
 aside:first-child{
@@ -44,5 +49,6 @@ aside .categorie a:hover{
     aside{
         position : unset;
         right: unset;
+        width: unset;
     }
 }

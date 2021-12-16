@@ -4,7 +4,7 @@
     background-color: $main-color;
     color: white;
     padding: 20px 20px;
-    margin-bottom: 75px;
+    margin-bottom: 200px;
 }
 
 #square figure img{
@@ -61,4 +61,10 @@
 
 #square figure:hover .nom{
     display: none;
+}
+
+@media (min-width: 768px){
+    #square{
+        margin-bottom: 100px;
+    }
 }

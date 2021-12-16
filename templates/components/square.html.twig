@@ -1,41 +1,25 @@
 <div id="square">
     <h2>Recommandations</h2>
     <div class="row">
+        {% for prestataire in prestataires %}
+            <div class="col-12 col-xs-6 col-md-3 col-lg-3">
+                <a href='#'>
+                    <figure>
+                        <span class="nom">{{prestataire.nom}}</span>
+                        {# <span class="description">{{prestataire.description}}</span> #}
+                        <img src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3">
+                    </figure>
+                </a>
+            </div>
+        {% endfor %}
         <div class="col-12 col-xs-6 col-md-3 col-lg-3">
-            <a href='#'>
-                <figure>
-                    <span class="nom">Nom</span>
-                    <span class="description">Description......</span>
-                    <img src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3">
-                </figure>
-            </a>
-        </div>
-        <div class="col-12 col-xs-6 col-md-3 col-lg-3">
-            <a href='#'>
-                <figure>
-                    <span class="nom">Nom</span>
-                    <span class="description">Description......</span>
-                    <img src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3">
-                </figure>
-            </a>
-        </div>
-        <div class="col-12 col-xs-6 col-md-3 col-lg-3">
-            <a href='#'>
-                <figure>
-                    <span class="nom">Nom</span>
-                    <span class="description">Description......</span>
-                    <img src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3">
-                </figure>
-            </a>
-        </div>
-        <div class="col-12 col-xs-6 col-md-3 col-lg-3">
-            <a href='#'>
-                <figure>
-                    <span class="nom">Nom</span>
-                    <span class="description">Description......</span>
-                    <img src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3">
-                </figure>
-            </a>
-        </div>
+                <a href='#'>
+                    <figure>
+                        <span class="nom">{{categorieEnAvant.nom}}</span>
+                        <span class="description">{{categorieEnAvant.description}}</span>
+                        <img src="https://play-lh.googleusercontent.com/IeNJWoKYx1waOhfWF6TiuSiWBLfqLb18lmZYXSgsH1fvb8v1IYiZr5aYWe0Gxu-pVZX3">
+                    </figure>
+                </a>
+            </div>
     </div>
 </div>
