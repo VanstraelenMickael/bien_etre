@@ -12648,6 +12648,7 @@ aside .categorie a:hover {
     position: unset;
     right: unset;
     width: unset;
+    overflow-y: hidden;
   }
 }
 
