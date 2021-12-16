@@ -50,6 +50,21 @@ class PrestataireRepository extends ServiceEntityRepository
         //     ->getResult()
         // ;
     }
+
+    /**
+     * @return Prestataire[] Returns an array of Prestataire objects
+     */
+    public function findFromForm($request)
+    {
+        $nom = $request->request->get('nom');
+        return $this->createQueryBuilder('p')
+            ->where('p.nom LIKE :nom')
+            ->setParameter('nom', '%'.$nom.'%')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
     
 
     /*
