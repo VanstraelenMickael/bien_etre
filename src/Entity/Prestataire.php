@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PrestataireRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class Prestataire
      * @ORM\Column(type="string", length=20)
      */
     private $numTva;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=CategorieDeServices::class, inversedBy="prestataires")
+     */
+    private $services;
+
+    public function __construct()
+    {
+        $this->services = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,30 @@ class Prestataire
     public function setNumTva(string $numTva): self
     {
         $this->numTva = $numTva;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|CategorieDeServices[]
+     */
+    public function getServices(): Collection
+    {
+        return $this->services;
+    }
+
+    public function addService(CategorieDeServices $service): self
+    {
+        if (!$this->services->contains($service)) {
+            $this->services[] = $service;
+        }
+
+        return $this;
+    }
+
+    public function removeService(CategorieDeServices $service): self
+    {
+        $this->services->removeElement($service);
 
         return $this;
     }
