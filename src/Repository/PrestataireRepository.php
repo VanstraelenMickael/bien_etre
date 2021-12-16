@@ -30,6 +30,26 @@ class PrestataireRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return Prestataire[] Returns an array of Prestataire objects
+     */
+    public function findFromServices($id)
+    {
+        return $this->createQueryBuilder('p')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+        // return $this->createQueryBuilder('p')
+        //     ->select('')
+        //     ->from('prestataire_categorie_de_services', 'p')
+        //     ->where('p.categorie_de_services_id = '.$id)
+        //     ->setMaxResults(3)
+        //     ->getQuery()
+        //     ->getResult()
+        // ;
+    }
     
 
     /*

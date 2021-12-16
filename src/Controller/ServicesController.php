@@ -25,7 +25,7 @@ class ServicesController extends AbstractController
         );
 
         $repository = $entitymanager->getRepository(Prestataire::class);
-        $prestataires = $repository->findLatest();
+        $prestataires = $repository->findFromServices($service->getId());
         
         return $this->render('services/index.html.twig', [
             "categories" => $categories,
