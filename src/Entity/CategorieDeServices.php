@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\CategorieDeServicesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,6 +38,16 @@ class CategorieDeServices
      * @ORM\Column(type="boolean")
      */
     private $valide = false;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Prestataire::class, mappedBy="services")
+     */
+    private $prestataires;
+
+    public function __construct()
+    {
+        $this->prestataires = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -86,6 +98,33 @@ class CategorieDeServices
     public function setValide(bool $valide): self
     {
         $this->valide = $valide;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Prestataire[]
+     */
+    public function getPrestataires(): Collection
+    {
+        return $this->prestataires;
+    }
+
+    public function addPrestataire(Prestataire $prestataire): self
+    {
+        if (!$this->prestataires->contains($prestataire)) {
+            $this->prestataires[] = $prestataire;
+            $prestataire->addService($this);
+        }
+
+        return $this;
+    }
+
+    public function removePrestataire(Prestataire $prestataire): self
+    {
+        if ($this->prestataires->removeElement($prestataire)) {
+            $prestataire->removeService($this);
+        }
 
         return $this;
     }
