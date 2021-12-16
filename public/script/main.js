@@ -32,4 +32,12 @@ $(function() {
         }
     })
 
+    // Fonction permettant le chargement de page avec le menu select
+    let select = $('#category_select');
+    select.on('change', function(e){
+        let selected = $('#category_select option:selected');
+        let id = selected.val();
+        window.location.replace('../services/'+id);
+    })
+
 });
