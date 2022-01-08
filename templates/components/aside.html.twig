@@ -27,6 +27,15 @@
                             <div class="wrapper_content" id="recherche_content">
                                 <form action="{{path('prestataires')}}" method="post">
                                 <div class="form-group">
+                                    <label>Catégories</label>
+                                    <select name='categorie' id="category_select_search" class="form-select" aria-label="Default select example">
+                                    <option value='none'>Choisissez une catégorie</option>
+                                    {% for categorie in categories %}
+                                    <option value='{{categorie.id}}'>{{categorie.nom}}</option>
+                                    {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="form-group">
                                     <label>Nom d'un prestataire</label>
                                     <input name="nom" type="text" class="username form-control"/>
                                 </div>
@@ -53,6 +62,7 @@
                                 <div class="form-group">
                                     <label>Catégories</label>
                                     <select id="category_select" class="form-select" aria-label="Default select example">
+                                    <option value='none'>Choisissez une catégorie</option>
                                     {% for categorie in categories %}
                                     <option value='{{categorie.id}}'>{{categorie.nom}}</option>
                                     {% endfor %}
