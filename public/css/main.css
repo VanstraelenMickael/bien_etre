@@ -12433,6 +12433,10 @@ a:hover {
           align-items: center;
 }
 
+.body_container {
+  margin: 25px 0px 50px 0px;
+}
+
 .btn_primary {
   background-color: #38B972;
   border: 1px solid #38B972;
@@ -12648,6 +12652,7 @@ aside .categorie a:hover {
     position: unset;
     right: unset;
     width: unset;
+    overflow-y: hidden;
   }
 }
 

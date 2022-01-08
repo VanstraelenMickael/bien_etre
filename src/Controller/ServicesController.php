@@ -10,14 +10,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
-class HomeController extends AbstractController
+class ServicesController extends AbstractController
 {
     /**
-     * @Route("/", name="home")
+     * @Route("/services/{id}", name="services")
      */
-    public function home(EntityManagerInterface $entitymanager): Response
+    public function index(CategorieDeServices $service, EntityManagerInterface $entitymanager): Response
     {
         $repository = $entitymanager->getRepository(CategorieDeServices::class);
         $categories = $repository->findAll();
@@ -26,12 +25,13 @@ class HomeController extends AbstractController
         );
 
         $repository = $entitymanager->getRepository(Prestataire::class);
-        $prestataires = $repository->findLatest();
-
-        return $this->render('home/index.html.twig', [
+        $prestataires = $repository->findFromServices($service->getId());
+        
+        return $this->render('services/index.html.twig', [
             "categories" => $categories,
             "prestataires" => $prestataires,
-            "categorieEnAvant" => $enAvant[0]
+            "categorieEnAvant" => $enAvant[0],
+            "service" => $service
         ]);
     }
 }
