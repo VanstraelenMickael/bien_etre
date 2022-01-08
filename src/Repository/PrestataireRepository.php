@@ -38,6 +38,7 @@ class PrestataireRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->setMaxResults(3)
+            // ->where('categorie_de_service.id = '.$id)
             ->getQuery()
             ->getResult()
         ;
@@ -49,6 +50,22 @@ class PrestataireRepository extends ServiceEntityRepository
         //     ->getQuery()
         //     ->getResult()
         // ;
+    }
+
+    /**
+     * @return Prestataire[] Returns an array of Prestataire objects
+     */
+    public function findFromForm($request)
+    {
+        $categorie = $request->request->get('categorie');
+        $nom = $request->request->get('nom');
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.nom LIKE :nom')
+            ->setParameter('nom', '%'.$nom.'%')
+            ->setMaxResults(20)
+            ->getQuery()
+            ->getResult()
+        ;
     }
     
 

@@ -12464,7 +12464,7 @@ a:hover {
 }
 
 #recherche_content {
-  height: 400px;
+  height: 480px;
   -webkit-transition: 0.4s;
   transition: 0.4s;
   overflow: hidden;

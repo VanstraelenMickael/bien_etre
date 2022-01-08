@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+{% for prestataire in prestataires_form %}
+{{dump(prestataire)}}
+<a href=''><p>{{prestataire.nom}}</p></a>
+{% endfor %}
+{% endblock %}
