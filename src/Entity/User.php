@@ -70,6 +70,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $inscriptConfirm = 0;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Localite::class, inversedBy="users")
+     */
+    private $localite;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=CodePostal::class, inversedBy="users")
+     */
+    private $codePostal;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Commune::class, inversedBy="users")
+     */
+    private $commune;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -239,6 +254,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setInscriptConfirm(bool $inscriptConfirm): self
     {
         $this->inscriptConfirm = $inscriptConfirm;
+
+        return $this;
+    }
+
+    public function getLocalite(): ?Localite
+    {
+        return $this->localite;
+    }
+
+    public function setLocalite(?Localite $localite): self
+    {
+        $this->localite = $localite;
+
+        return $this;
+    }
+
+    public function getCodePostal(): ?CodePostal
+    {
+        return $this->codePostal;
+    }
+
+    public function setCodePostal(?CodePostal $codePostal): self
+    {
+        $this->codePostal = $codePostal;
+
+        return $this;
+    }
+
+    public function getCommune(): ?Commune
+    {
+        return $this->commune;
+    }
+
+    public function setCommune(?Commune $commune): self
+    {
+        $this->commune = $commune;
 
         return $this;
     }
