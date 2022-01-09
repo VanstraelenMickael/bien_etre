@@ -14,7 +14,7 @@ final class Version20220109093028 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'ajout relation entre user et internaute';
     }
 
     public function up(Schema $schema): void

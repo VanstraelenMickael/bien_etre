@@ -14,7 +14,7 @@ final class Version20220108101757 extends AbstractMigration
 {
     public function getDescription(): string
     {
-        return '';
+        return 'Creation des tables codepostal commune et localite';
     }
 
     public function up(Schema $schema): void
