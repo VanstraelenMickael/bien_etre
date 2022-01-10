@@ -34,6 +34,7 @@ class Internaute
 
     /**
      * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $user;
 

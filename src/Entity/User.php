@@ -87,6 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\OneToOne(targetEntity=Internaute::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(onDelete="CASCADE") 
      */
     private $internaute;
 
@@ -307,6 +308,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setInternaute(?Internaute $internaute): self
     {
         $this->internaute = $internaute;
+
+        return $this;
+    }
+
+    public function getPrestataire(): ?Prestataire
+    {
+        return $this->prestataire;
+    }
+
+    public function setPrestataire(?Prestataire $prestataire): self
+    {
+        $this->prestataire = $prestataire;
 
         return $this;
     }

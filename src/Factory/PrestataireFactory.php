@@ -8,6 +8,8 @@ use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
 
+use App\Factory\UserFactory;
+
 /**
  * @extends ModelFactory<Prestataire>
  *
@@ -45,6 +47,7 @@ final class PrestataireFactory extends ModelFactory
             'siteweb' => self::faker()->url(),
             'numTel' => self::faker()->e164PhoneNumber(),
             'numTva' => self::faker()->swiftBicNumber(),
+            'user' => UserFactory::createOne()
         ];
     }
 

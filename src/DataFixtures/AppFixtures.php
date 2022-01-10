@@ -24,8 +24,8 @@ class AppFixtures extends Fixture
         CategorieDeServicesFactory::createMany(30);
         ImagesFactory::createMany(100);
         // InternauteFactory::createMany(100);
-        UserFactory::createMany(100);
         PrestataireFactory::createMany(100);
+        UserFactory::createMany(100);
         
         $manager->flush();
     }

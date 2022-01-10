@@ -44,6 +44,11 @@ class Prestataire
      */
     private $services;
 
+    /**
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
+     */
+    private $user;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
@@ -122,6 +127,18 @@ class Prestataire
     public function removeService(CategorieDeServices $service): self
     {
         $this->services->removeElement($service);
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
