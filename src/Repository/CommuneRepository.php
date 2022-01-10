@@ -19,6 +19,16 @@ class CommuneRepository extends ServiceEntityRepository
         parent::__construct($registry, Commune::class);
     }
 
+    public function findLast()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Commune[] Returns an array of Commune objects
     //  */

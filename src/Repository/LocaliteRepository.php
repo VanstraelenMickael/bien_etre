@@ -19,6 +19,16 @@ class LocaliteRepository extends ServiceEntityRepository
         parent::__construct($registry, Localite::class);
     }
 
+    public function findLast()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Localite[] Returns an array of Localite objects
     //  */

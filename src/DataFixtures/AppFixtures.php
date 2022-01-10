@@ -7,7 +7,9 @@ use App\Factory\CategorieDeServicesFactory;
 use App\Factory\ImagesFactory;
 use App\Factory\UserFactory;
 use App\Factory\InternauteFactory;
-
+use App\Factory\LocaliteFactory;
+use App\Factory\CommuneFactory;
+use App\Factory\CodePostalFactory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -15,11 +17,15 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+        CodePostalFactory::createMany(30);
+        CommuneFactory::createMany(30);
+        LocaliteFactory::createMany(30);
+
         CategorieDeServicesFactory::createMany(30);
-        ImagesFactory::createMany(200);
-        InternauteFactory::createMany(200);
-        UserFactory::createMany(200);
-        PrestataireFactory::createMany(200);
+        ImagesFactory::createMany(100);
+        // InternauteFactory::createMany(100);
+        UserFactory::createMany(100);
+        PrestataireFactory::createMany(100);
         
         $manager->flush();
     }

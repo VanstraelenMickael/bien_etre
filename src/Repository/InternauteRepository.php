@@ -29,6 +29,17 @@ class InternauteRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findLastAvailable()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->where('p.user is NULL')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Internaute[] Returns an array of Internaute objects
     //  */

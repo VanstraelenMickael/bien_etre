@@ -19,6 +19,16 @@ class CodePostalRepository extends ServiceEntityRepository
         parent::__construct($registry, CodePostal::class);
     }
 
+    public function findLast()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return CodePostal[] Returns an array of CodePostal objects
     //  */

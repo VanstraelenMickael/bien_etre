@@ -4,7 +4,10 @@ namespace App\Factory;
 
 use App\Entity\User;
 use App\Entity\Internaute;
-use App\Repository\InternauteRepository;
+use App\Entity\CodePostal;
+use App\Entity\Commune;
+use App\Entity\Localite;
+
 use App\Repository\UserRepository;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
@@ -14,6 +17,7 @@ use DateTime;
 use App\Factory\CodePostalFactory;
 use App\Factory\CommuneFactory;
 use App\Factory\LocaliteFactory;
+use App\Factory\InternauteFactory;
 
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -52,13 +56,7 @@ final class UserFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
-        $cp = CodePostalFactory::createOne();
-        $cm = CommuneFactory::createOne();
-        $lo = LocaliteFactory::createOne();
-
-        $repository = $this->manager->getRepository(Internaute::class);
-        $internaute = $repository->findLast();
-
+        $internaute = InternauteFactory::createOne();
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'email' => self::faker()->email(),
@@ -67,10 +65,7 @@ final class UserFactory extends ModelFactory
             'adresseNum' => self::faker()->buildingNumber(),
             'inscription' => new DateTime(),
             'typeUtilisateur' => 'Prest',
-            'codePostal' => $cp,
-            'commune' => $cm,
-            'localite' => $lo,
-            // 'internaute' => $internaute[0]
+            'internaute' => $internaute
         ];
     }
 
@@ -79,9 +74,29 @@ final class UserFactory extends ModelFactory
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
             ->afterInstantiate(function(User $user) {
+                $repository = $this->manager->getRepository(CodePostal::class);
+                $max = $repository->findLast();
+                $max = $max[0]->getId();
+                $cp = $repository->find(rand($max-29,$max));
+
+                $repository = $this->manager->getRepository(Commune::class);
+                $max = $repository->findLast();
+                $max = $max[0]->getId();
+                $cm = $repository->find(rand($max-29,$max));
+
+                $repository = $this->manager->getRepository(Localite::class);
+                $max = $repository->findLast();
+                $max = $max[0]->getId();
+                $lo = $repository->find(rand($max-29,$max));
+
                 $user->setPassword(
                     $this->passwordHasher->hashpassword($user, "test"),
                 );
+                $user->setCodePostal($cp);
+                $user->setCommune($cm);
+                $user->setLocalite($lo);
+                $internaute = $user->getInternaute();
+                $internaute->setUser($user);
                 //$this->passwordHasher->hashpassword($this->user, "test"),
             })
         ;
