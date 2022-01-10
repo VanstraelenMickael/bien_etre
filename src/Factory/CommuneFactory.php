@@ -39,7 +39,7 @@ final class CommuneFactory extends ModelFactory
     {
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'commune' => self::faker()->cityPrefix(),
+            'commune' => self::faker()->state(),
         ];
     }
 

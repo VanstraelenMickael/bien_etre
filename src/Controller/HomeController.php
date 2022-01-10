@@ -3,6 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\CategorieDeServices;
+use App\Entity\Commune;
+use App\Entity\CodePostal;
+use App\Entity\Localite;
 use App\Entity\Prestataire;
 use App\Entity\Internaute;
 use App\Entity\Images;
@@ -30,6 +33,23 @@ class HomeController extends AbstractController
             $enAvant = $repository->findLast();
         }
 
+        $repository = $entitymanager->getRepository(CodePostal::class);
+        $codePostaux = $repository->findBy(
+            array(),
+            array('codePostal' => 'ASC')
+        );
+        $repository = $entitymanager->getRepository(Commune::class);
+        $communes = $repository->findBy(
+            array(),
+            array('commune' => 'ASC')
+        );
+
+        $repository = $entitymanager->getRepository(Localite::class);
+        $localites = $repository->findBy(
+            array(),
+            array('localite' => 'ASC')
+        );
+
         $repository = $entitymanager->getRepository(Prestataire::class);
         $prestataires = $repository->findLatest();
 
@@ -38,9 +58,11 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             "categories" => $categories,
+            "codePostaux" => $codePostaux,
+            "communes" => $communes,
+            "localites" => $localites,
             "prestataires" => $prestataires,
-            "categorieEnAvant" => $enAvant[0],
-            "internaute" => $internaute[0]
+            "categorieEnAvant" => $enAvant[0]
         ]);
     }
 }

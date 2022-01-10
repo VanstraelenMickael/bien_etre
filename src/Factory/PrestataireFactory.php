@@ -3,10 +3,13 @@
 namespace App\Factory;
 
 use App\Entity\Prestataire;
+use App\Entity\CategorieDeServices;
 use App\Repository\PrestataireRepository;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
+
+use Doctrine\ORM\EntityManagerInterface;
 
 use App\Factory\UserFactory;
 
@@ -30,8 +33,9 @@ use App\Factory\UserFactory;
  */
 final class PrestataireFactory extends ModelFactory
 {
-    public function __construct()
-    {
+    public function __construct(EntityManagerInterface $manager)
+    {   
+        $this->manager = $manager;
         parent::__construct();
 
         // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
@@ -55,7 +59,13 @@ final class PrestataireFactory extends ModelFactory
     {
         // see https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#initialization
         return $this
-            // ->afterInstantiate(function(Prestataire $prestataire): void {})
+            ->afterInstantiate(function(Prestataire $prestataire): void {
+                $service = $this->manager->getRepository(CategorieDeServices::class);
+                $max = $service->findLast();
+                $max = $max[0]->getId();
+                $service = $service->find(rand($max-29, $max));
+                $prestataire->addService($service);
+            })
         ;
     }
 

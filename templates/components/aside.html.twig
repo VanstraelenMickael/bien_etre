@@ -40,16 +40,31 @@
                                     <input name="nom" type="text" class="username form-control"/>
                                 </div>
                                 <div class="form-group">
-                                    <label>Code postal</label>
-                                    <input name="cp" type="number" class="username form-control"/>
+                                    <label>Code Postal</label>
+                                    <select name='codepostal' class="form-select" aria-label="Default select example">
+                                    <option value='none'>Choisissez un code postal</option>
+                                    {% for codePostal in codePostaux %}
+                                    <option value='{{codePostal.id}}'>{{codePostal.codePostal}}</option>
+                                    {% endfor %}
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Localité</label>
-                                    <input name="localite" type="text" class="username form-control"/>
+                                    <select name='localite' class="form-select" aria-label="Default select example">
+                                    <option value='none'>Choisissez une localité</option>
+                                    {% for localite in localites %}
+                                    <option value='{{localite.id}}'>{{localite.localite}}</option>
+                                    {% endfor %}
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>Commune</label>
-                                    <input name="commune" type="text" class="username form-control"/>
+                                    <select name='commune' class="form-select" aria-label="Default select example">
+                                    <option value='none'>Choisissez une commune</option>
+                                    {% for commune in communes %}
+                                    <option value='{{commune.id}}'>{{commune.commune}}</option>
+                                    {% endfor %}
+                                    </select>
                                 </div>
                                 <input type="submit" value="Rechercher" class="btn_primary"/>
                                 </form>

@@ -25,7 +25,9 @@ class PrestataireRepository extends ServiceEntityRepository
     public function findLatest()
     {
         return $this->createQueryBuilder('p')
+            ->leftJoin('p.user','b','p.user = b.id')
             ->setMaxResults(3)
+            ->orderBy('b.inscription', 'DESC')
             ->getQuery()
             ->getResult()
         ;
