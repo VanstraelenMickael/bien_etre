@@ -19,6 +19,16 @@ class CategorieDeServicesRepository extends ServiceEntityRepository
         parent::__construct($registry, CategorieDeServices::class);
     }
 
+    public function findLast()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return CategorieDeServices[] Returns an array of CategorieDeServices objects
     //  */

@@ -19,6 +19,16 @@ class InternauteRepository extends ServiceEntityRepository
         parent::__construct($registry, Internaute::class);
     }
 
+    public function findLast()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     // /**
     //  * @return Internaute[] Returns an array of Internaute objects
     //  */

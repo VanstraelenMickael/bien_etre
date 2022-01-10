@@ -3,6 +3,8 @@
 namespace App\Factory;
 
 use App\Entity\User;
+use App\Entity\Internaute;
+use App\Repository\InternauteRepository;
 use App\Repository\UserRepository;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
@@ -12,6 +14,10 @@ use DateTime;
 use App\Factory\CodePostalFactory;
 use App\Factory\CommuneFactory;
 use App\Factory\LocaliteFactory;
+
+use Doctrine\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 /**
  * @extends ModelFactory<User>
@@ -33,8 +39,12 @@ use App\Factory\LocaliteFactory;
  */
 final class UserFactory extends ModelFactory
 {
-    public function __construct()
+    private $passwordHasher;
+
+    public function __construct(UserPasswordHasherInterface $passwordHasher, EntityManagerInterface $manager)
     {
+        $this -> passwordHasher = $passwordHasher;
+        $this -> manager = $manager;
         parent::__construct();
 
         // TODO inject services if required (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#factories-as-services)
@@ -42,6 +52,13 @@ final class UserFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
+        $cp = CodePostalFactory::createOne();
+        $cm = CommuneFactory::createOne();
+        $lo = LocaliteFactory::createOne();
+
+        $repository = $this->manager->getRepository(Internaute::class);
+        $internaute = $repository->findLast();
+
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'email' => self::faker()->email(),
@@ -49,10 +66,11 @@ final class UserFactory extends ModelFactory
             'adresse' => self::faker()->streetName(),
             'adresseNum' => self::faker()->buildingNumber(),
             'inscription' => new DateTime(),
-            'typeUtilisateur' => 'Prestataire',
-            // 'codePostal' => CodePostalFactory::createOne()->getId(),
-            // 'commune' => CommuneFactory::createOne()->getId(),
-            // 'localite' => LocaliteFactory::createOne()->getId(),
+            'typeUtilisateur' => 'Prest',
+            'codePostal' => $cp,
+            'commune' => $cm,
+            'localite' => $lo,
+            // 'internaute' => $internaute[0]
         ];
     }
 

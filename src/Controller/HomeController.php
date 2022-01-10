@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\CategorieDeServices;
 use App\Entity\Prestataire;
+use App\Entity\Internaute;
 use App\Entity\Images;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -24,14 +25,22 @@ class HomeController extends AbstractController
         $enAvant = $repository->findBy(
             array('enAvant' => '1')
         );
+        // Si pour une quelconque raison aucune catégorie n'est mise en avant, j'affiche la dernière catégorie créée.
+        if(empty($enAvant)){
+            $enAvant = $repository->findLast();
+        }
 
         $repository = $entitymanager->getRepository(Prestataire::class);
         $prestataires = $repository->findLatest();
 
+        $repository = $entitymanager->getRepository(Internaute::class);
+        $internaute = $repository->findLast();
+
         return $this->render('home/index.html.twig', [
             "categories" => $categories,
             "prestataires" => $prestataires,
-            "categorieEnAvant" => $enAvant[0]
+            "categorieEnAvant" => $enAvant[0],
+            "internaute" => $internaute[0]
         ]);
     }
 }

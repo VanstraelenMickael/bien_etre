@@ -31,6 +31,16 @@ class PrestataireRepository extends ServiceEntityRepository
         ;
     }
 
+    public function findLast()
+    {
+        return $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /**
      * @return Prestataire[] Returns an array of Prestataire objects
      */

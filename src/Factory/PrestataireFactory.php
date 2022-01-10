@@ -37,9 +37,11 @@ final class PrestataireFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
+        $nom = self::faker()->firstName();
+        $nom = substr($nom, 0, 29);
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'nom' => self::faker()->firstName().substr(0,29),
+            'nom' => $nom,
             'siteweb' => self::faker()->url(),
             'numTel' => self::faker()->e164PhoneNumber(),
             'numTva' => self::faker()->swiftBicNumber(),

@@ -85,6 +85,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $commune;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Internaute::class, cascade={"persist", "remove"})
+     */
+    private $internaute;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -290,6 +295,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCommune(?Commune $commune): self
     {
         $this->commune = $commune;
+
+        return $this;
+    }
+
+    public function getInternaute(): ?Internaute
+    {
+        return $this->internaute;
+    }
+
+    public function setInternaute(?Internaute $internaute): self
+    {
+        $this->internaute = $internaute;
 
         return $this;
     }

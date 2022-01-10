@@ -37,9 +37,12 @@ final class CategorieDeServicesFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
+        $nom = self::faker()->jobTitle();
+        $nom = substr($nom, 0, 29);
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'nom' => substr(self::faker()->jobTitle(),0,29),
+            
+            'nom' => $nom,
             'description' => self::faker()->text(10),
             'enAvant' => 0,
             'valide' => self::faker()->boolean(),
