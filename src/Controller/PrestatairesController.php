@@ -35,8 +35,6 @@ class PrestatairesController extends AbstractController
         $prestataires = $repository->findLatest();
 
         $prestataires_form = $repository->findFromForm($request);
-
-        //var_dump($prestataires_form);
         
         return $this->render('prestataires/index.html.twig', [
             "prestataires" => $prestataires,

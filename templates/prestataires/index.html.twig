@@ -3,6 +3,9 @@
 {% block body %}
 {% for prestataire in prestataires_form %}
 {{dump(prestataire)}}
+{{dump(prestataire.user.codePostal)}}
+{{dump(prestataire.user.commune)}}
+{{dump(prestataire.user.localite)}}
 <a href=''><p>{{prestataire.nom}}</p></a>
 {% endfor %}
 {% endblock %}

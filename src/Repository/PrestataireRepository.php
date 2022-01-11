@@ -54,20 +54,19 @@ class PrestataireRepository extends ServiceEntityRepository
      */
     public function findFromServices($id)
     {
-        return $this->createQueryBuilder('p')
-            ->setMaxResults(3)
-            // ->where('categorie_de_service.id = '.$id)
-            ->getQuery()
-            ->getResult()
-        ;
         // return $this->createQueryBuilder('p')
-        //     ->select('')
-        //     ->from('prestataire_categorie_de_services', 'p')
-        //     ->where('p.categorie_de_services_id = '.$id)
         //     ->setMaxResults(3)
+        //     // ->where('categorie_de_service.id = '.$id)
         //     ->getQuery()
         //     ->getResult()
         // ;
+        return $this->createQueryBuilder('p')
+            ->where('p.services = :id')
+            ->setMaxResults(3)
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult()
+        ;
     }
 
     /**
@@ -82,29 +81,58 @@ class PrestataireRepository extends ServiceEntityRepository
         $commune = $request->request->get('commune');
         $localite = $request->request->get('localite');
 
-        return $this->createQueryBuilder('p')
-            // ->join('services', 's','WITH', 'p.services.id = s.id')
-            ->join('p.user','u','WITH', 'u.id = p.user')
-            ->join('u.codePostal', 'cp', 'WITH', 'cp.id= u.codePostal')
-            ->join('u.commune', 'co', 'WITH', 'co.id= u.commune')
-            ->join('u.localite', 'lo', 'WITH', 'lo.id= u.localite')
-            ->andWhere('p.nom LIKE :nom')
-            // si $codePostal != "none" ?
-            ->andWhere('cp.id = :cp')
-            // si $commune != "none" ? 
-            ->andWhere('co.id = :co')
-            // si $localite != "none" ?
-            ->andWhere('lo.id = :lo')
-            ->setParameter('nom', '%'.$nom.'%')
-            ->setParameter('cp', $codePostal)
-            ->setParameter('co', $commune)
-            ->setParameter('lo', $localite)
-            ->setMaxResults(20)
-            ->getQuery()
-            ->getResult()
-        ;
+        $qb = $this->createQueryBuilder('p')
+            ->join('p.user','u')
+            ->where('p.nom LIKE :nom');
+            
+            $qb ->setParameter('nom', '%'.$nom.'%')
+                ->setMaxResults(20);
+
+            if($codePostal != "none"){
+                $qb ->andWhere('u.codePostal = :cp')
+                    ->setParameter('cp', $codePostal);
+            }
+
+            if($commune != "none"){
+                $qb->andWhere('u.commune = :co')
+                ->setParameter('co', $commune);
+            }
+            if($localite != "none"){
+                $qb->andWhere('u.localite = :lo')
+                ->setParameter('lo', $localite);
+            }
+
+            return $qb->getQuery()->execute();
+
+        //     ->getQuery()
+        //     ->getResult();
+        // return $qb;
+
+        // $query = $this->createQueryBuilder('p')
+        //     // ->join('services', 's','WITH', 'p.services.id = s.id')
+        //     ->join('p.user','u','WITH', 'u.id = p.user')
+        //     ->andWhere('p.nom LIKE :nom')
+        //     ->setParameter('nom', '%'.$nom.'%');
+        //     // if($codePostal != "none"){
+        //     //     $query->andWhere('u.codePostal = :cp')
+        //     //     ->setParameter('cp', $codePostal);
+        //     // }
+        //     // if($commune != "none"){
+        //     //     $query->andWhere('u.commune = :co')
+        //     //     ->setParameter('co', $commune);
+        //     // }
+        //     // if($localite != "none"){
+        //     //     $query->andWhere('u.localite = :lo')
+        //     //     ->setParameter('lo', $localite);
+        //     // }
+            
+        //     $query->setMaxResults(20)
+        //     ->getQuery()
+        //     ->getResult()
+        // ;
+
+        // return $query;
     }
-    
 
     /*
     public function findOneBySomeField($value): ?Prestataire

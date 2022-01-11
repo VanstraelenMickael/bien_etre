@@ -5,6 +5,7 @@ use App\Repository\CategorieDeServicesRepository;
 use App\Repository\CodePostalRepository;
 use App\Repository\CommuneRepository;
 use App\Repository\LocaliteRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -16,13 +17,15 @@ class AsideExtension extends AbstractExtension{
     private $localite;
     private $commune;
     private $twig;
+    private $request;
 
-    public function __construct(CategorieDeServicesRepository $categorie, CodePostalRepository $codePostal, LocaliteRepository $localite, CommuneRepository $commune, Environment $twig){
+    public function __construct(CategorieDeServicesRepository $categorie, CodePostalRepository $codePostal, LocaliteRepository $localite, CommuneRepository $commune, Environment $twig, Request $request){
         $this->categorie = $categorie;
         $this->codePostal = $codePostal;
         $this->localite = $localite;
         $this->commune = $commune;
         $this->twig = $twig;
+        $this->request = $request;
     }
 
     public function getFunctions(): array{
@@ -56,7 +59,8 @@ class AsideExtension extends AbstractExtension{
             'categories' => $categories,
             'localites' => $localites,
             'codePostaux' => $codePostaux,
-            'communes' => $communes
+            'communes' => $communes,
+            'request' => $request
         ]);
     }
 
