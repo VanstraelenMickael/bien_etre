@@ -3,6 +3,12 @@
 namespace App\Repository;
 
 use App\Entity\Prestataire;
+use App\Entity\User;
+use App\Entity\CategorieDeServices;
+use App\Entity\Commune;
+use App\Entity\CodePostal;
+use App\Entity\Localite;
+
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -71,9 +77,28 @@ class PrestataireRepository extends ServiceEntityRepository
     {
         $categorie = $request->request->get('categorie');
         $nom = $request->request->get('nom');
+        $categorie = $request->request->get('categorie');
+        $codePostal = $request->request->get('codePostal');
+        $commune = $request->request->get('commune');
+        $localite = $request->request->get('localite');
+
         return $this->createQueryBuilder('p')
+            // ->join('services', 's','WITH', 'p.services.id = s.id')
+            ->join('p.user','u','WITH', 'u.id = p.user')
+            ->join('u.codePostal', 'cp', 'WITH', 'cp.id= u.codePostal')
+            ->join('u.commune', 'co', 'WITH', 'co.id= u.commune')
+            ->join('u.localite', 'lo', 'WITH', 'lo.id= u.localite')
             ->andWhere('p.nom LIKE :nom')
+            // si $codePostal != "none" ?
+            ->andWhere('cp.id = :cp')
+            // si $commune != "none" ? 
+            ->andWhere('co.id = :co')
+            // si $localite != "none" ?
+            ->andWhere('lo.id = :lo')
             ->setParameter('nom', '%'.$nom.'%')
+            ->setParameter('cp', $codePostal)
+            ->setParameter('co', $commune)
+            ->setParameter('lo', $localite)
             ->setMaxResults(20)
             ->getQuery()
             ->getResult()

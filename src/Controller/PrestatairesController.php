@@ -23,7 +23,6 @@ class PrestatairesController extends AbstractController
     public function index(EntityManagerInterface $entitymanager, Request $request): Response
     {
         $repository = $entitymanager->getRepository(CategorieDeServices::class);
-        $categories = $repository->findAll();
         $enAvant = $repository->findBy(
             array('enAvant' => '1')
         );
@@ -37,30 +36,9 @@ class PrestatairesController extends AbstractController
 
         $prestataires_form = $repository->findFromForm($request);
 
-        $repository = $entitymanager->getRepository(CodePostal::class);
-        $codePostaux = $repository->findBy(
-            array(),
-            array('codePostal' => 'ASC')
-        );
-        $repository = $entitymanager->getRepository(Commune::class);
-        $communes = $repository->findBy(
-            array(),
-            array('commune' => 'ASC')
-        );
-
-        $repository = $entitymanager->getRepository(Localite::class);
-        $localites = $repository->findBy(
-            array(),
-            array('localite' => 'ASC')
-        );
-
         //var_dump($prestataires_form);
         
         return $this->render('prestataires/index.html.twig', [
-            "categories" => $categories,
-            "codePostaux" => $codePostaux,
-            "communes" => $communes,
-            "localites" => $localites,
             "prestataires" => $prestataires,
             "categorieEnAvant" => $enAvant[0],
             "prestataires_form" => $prestataires_form

@@ -24,7 +24,6 @@ class HomeController extends AbstractController
     public function home(EntityManagerInterface $entitymanager): Response
     {
         $repository = $entitymanager->getRepository(CategorieDeServices::class);
-        $categories = $repository->findAll();
         $enAvant = $repository->findBy(
             array('enAvant' => '1')
         );
@@ -33,23 +32,6 @@ class HomeController extends AbstractController
             $enAvant = $repository->findLast();
         }
 
-        $repository = $entitymanager->getRepository(CodePostal::class);
-        $codePostaux = $repository->findBy(
-            array(),
-            array('codePostal' => 'ASC')
-        );
-        $repository = $entitymanager->getRepository(Commune::class);
-        $communes = $repository->findBy(
-            array(),
-            array('commune' => 'ASC')
-        );
-
-        $repository = $entitymanager->getRepository(Localite::class);
-        $localites = $repository->findBy(
-            array(),
-            array('localite' => 'ASC')
-        );
-
         $repository = $entitymanager->getRepository(Prestataire::class);
         $prestataires = $repository->findLatest();
 
@@ -57,10 +39,6 @@ class HomeController extends AbstractController
         $internaute = $repository->findLastAvailable();
 
         return $this->render('home/index.html.twig', [
-            "categories" => $categories,
-            "codePostaux" => $codePostaux,
-            "communes" => $communes,
-            "localites" => $localites,
             "prestataires" => $prestataires,
             "categorieEnAvant" => $enAvant[0]
         ]);
