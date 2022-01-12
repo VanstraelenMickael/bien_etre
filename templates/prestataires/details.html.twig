@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+<p>Nom : {{prestataire.nom}}</p>
+{# <p>Description : {{prestataire.description}}</p> #}
+<p>Photo : </p>
+<p>Adresse : {{prestataire.user.adresse}}, {{prestataire.user.adresseNum}} - {{prestataire.user.codePostal.codePostal}} - {{prestataire.user.localite.localite|upper}}</p>
+<p>Adresse électronique : {{prestataire.user.email}}</p>
+<p>Numéro de GSM : {{prestataire.numTel}}</p>
+<p>Numéro de TVA : {{prestataire.numTva}}</p>
+<p><a href="{{prestataire.siteweb}}">Site web</a></p>
+<p>Promotions</p>
+<p>Stages</p>
+</div>
+{% endblock %}

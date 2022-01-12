@@ -45,4 +45,31 @@ class PrestatairesController extends AbstractController
             "prestataires_form" => $prestataires_form
         ]);
     }
+
+    /**
+     * @Route("/prestataires/{id}", name="prestataire_details")
+     */
+    public function details(EntityManagerInterface $entitymanager, Request $request, Prestataire $prestataire): Response
+    {
+        $services = $prestataire->getServices();
+        
+        $repository = $entitymanager->getRepository(Prestataire::class);
+        $prestataires = $repository->findFromServices($services[0]->getId());
+
+        $repository = $entitymanager->getRepository(CategorieDeServices::class);
+        $enAvant = $repository->findBy(
+            array('enAvant' => '1')
+        );
+        // Si pour une quelconque raison aucune catégorie n'est mise en avant, j'affiche la dernière catégorie créée.
+        if(empty($enAvant)){
+            $enAvant = $repository->findLast();
+        }
+
+        return $this->render('prestataires/details.html.twig', [
+            "prestataire" => $prestataire,
+            "prestataires" => $prestataires,
+            "categorieEnAvant" => $enAvant[0]
+        ]);
+    }
+
 }
