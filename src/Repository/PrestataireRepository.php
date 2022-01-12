@@ -76,7 +76,7 @@ class PrestataireRepository extends ServiceEntityRepository
         $localite = $request->request->get('localite');
 
         $qb = $this->createQueryBuilder('p')
-            
+            ->orderBy('p.nom', 'ASC')
             ->join('p.user','u')
             ->where('p.nom LIKE :nom');
 
