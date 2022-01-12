@@ -54,14 +54,8 @@ class PrestataireRepository extends ServiceEntityRepository
      */
     public function findFromServices($id)
     {
-        // return $this->createQueryBuilder('p')
-        //     ->setMaxResults(3)
-        //     // ->where('categorie_de_service.id = '.$id)
-        //     ->getQuery()
-        //     ->getResult()
-        // ;
         return $this->createQueryBuilder('p')
-            ->where('p.services = :id')
+            ->join('p.services', 's', 'WITH', 's.id = :id')
             ->setMaxResults(3)
             ->setParameter('id', $id)
             ->getQuery()
@@ -82,8 +76,14 @@ class PrestataireRepository extends ServiceEntityRepository
         $localite = $request->request->get('localite');
 
         $qb = $this->createQueryBuilder('p')
+            
             ->join('p.user','u')
             ->where('p.nom LIKE :nom');
+
+            if($categorie != "none"){
+                $qb ->join('p.services','s','WITH', 's.id = :categorie')
+                    ->setParameter('categorie',$categorie);
+            }
             
             $qb ->setParameter('nom', '%'.$nom.'%')
                 ->setMaxResults(20);
