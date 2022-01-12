@@ -19,13 +19,12 @@ class AsideExtension extends AbstractExtension{
     private $twig;
     private $request;
 
-    public function __construct(CategorieDeServicesRepository $categorie, CodePostalRepository $codePostal, LocaliteRepository $localite, CommuneRepository $commune, Environment $twig, Request $request){
+    public function __construct(CategorieDeServicesRepository $categorie, CodePostalRepository $codePostal, LocaliteRepository $localite, CommuneRepository $commune, Environment $twig){
         $this->categorie = $categorie;
         $this->codePostal = $codePostal;
         $this->localite = $localite;
         $this->commune = $commune;
         $this->twig = $twig;
-        $this->request = $request;
     }
 
     public function getFunctions(): array{
@@ -59,8 +58,7 @@ class AsideExtension extends AbstractExtension{
             'categories' => $categories,
             'localites' => $localites,
             'codePostaux' => $codePostaux,
-            'communes' => $communes,
-            'request' => $request
+            'communes' => $communes
         ]);
     }
 
