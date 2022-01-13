@@ -1,3 +1,22 @@
 .body_container{
-    margin: 25px 0px 50px 0px;
+    margin: 25px 0px 25px 0px;
+}
+
+.body_container .container{
+    padding: 25px;
+    border: 1px solid $main-color;
+}
+
+.body_container .container h2{
+    color: $main-color;
+    @include title-size;
+    margin-bottom: 25px;
+}
+
+.container .bloc{
+    margin-bottom: 25px;
+}
+
+.container .fiche .row{
+    margin-bottom: 25px;
 }
