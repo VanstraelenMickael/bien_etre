@@ -11,6 +11,15 @@ $(function() {
         }
     })
 
+    if($('#recherche_content').hasClass('wrapper_content_close')){
+        $('.icon').css('transform', 'rotate('+ rotate +'deg)');
+        if(rotate === 0){
+            rotate = 180;
+        }else{
+            rotate = 0;
+        }
+    }
+
     // fonction permettant d'ouvrir et fermer le menu hamburger
     $('.hamburger').click(function(e){
         let ham = document.querySelector('.hamburger');

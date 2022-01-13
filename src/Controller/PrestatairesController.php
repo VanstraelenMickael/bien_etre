@@ -68,7 +68,8 @@ class PrestatairesController extends AbstractController
         return $this->render('prestataires/details.html.twig', [
             "prestataire" => $prestataire,
             "prestataires" => $prestataires,
-            "categorieEnAvant" => $enAvant[0]
+            "categorieEnAvant" => $enAvant[0],
+            "recherche_close" => true
         ]);
     }
 

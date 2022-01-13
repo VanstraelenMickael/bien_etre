@@ -33,7 +33,7 @@ class AsideExtension extends AbstractExtension{
         ];
     }
 
-    public function getAside(): string{
+    public function getAside($closed = false): string{
         $categories = $this->categorie->findBy(
             array(),
             array('nom' => 'ASC')
@@ -58,7 +58,8 @@ class AsideExtension extends AbstractExtension{
             'categories' => $categories,
             'localites' => $localites,
             'codePostaux' => $codePostaux,
-            'communes' => $communes
+            'communes' => $communes,
+            'closed' => $closed
         ]);
     }
 

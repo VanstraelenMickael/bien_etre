@@ -24,7 +24,7 @@
                         </div>
                         <div class="wrapper" id="recherche">
                             <h2 id="titre_recherche"><i class="fas fa-angle-down icon"></i> Rechercher</h2>
-                            <div class="wrapper_content" id="recherche_content">
+                            <div class="wrapper_content {% if closed %}wrapper_content_close{% endif %}" id="recherche_content">
                                 <form action="{{path('prestataires')}}" method="post">
                                 <div class="form-group">
                                     <label>Catégories</label>

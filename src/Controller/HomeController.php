@@ -40,7 +40,7 @@ class HomeController extends AbstractController
 
         return $this->render('home/index.html.twig', [
             "prestataires" => $prestataires,
-            "categorieEnAvant" => $enAvant[0]
+            "categorieEnAvant" => $enAvant[0],
         ]);
     }
 }

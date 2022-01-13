@@ -21,7 +21,11 @@
             <div class="row">
                 {% block aside %}
                 <div class="col-12 col-xs-12 col-md-4 col-lg-3 col-xl-3">
-                    {{ aside() }}
+                    {% if recherche_close is defined %}
+                        {{ aside(true) }}
+                    {% else %}
+                        {{ aside() }}
+                    {% endif %}
                 </div>
                 {% endblock %}
                 <div class="col-12 col-xs-12 col-md-8 col-lg-9 col-xl-9">
