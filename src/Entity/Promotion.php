@@ -53,13 +53,13 @@ class Promotion
     private $afficheJusque;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="promotions")
+     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="promotions", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $prestataire;
 
     /**
-     * @ORM\ManyToOne(targetEntity=CategorieDeServices::class, inversedBy="promotions")
+     * @ORM\ManyToOne(targetEntity=CategorieDeServices::class, inversedBy="promotions", cascade={"persist"})
      */
     private $service;
 

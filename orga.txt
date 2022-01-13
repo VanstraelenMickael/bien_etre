@@ -1,0 +1,10 @@
+Design
+SaSS
+Organisation sur Trello
+Création des composants visuels
+Version mobile first
+Créations des entités
+Extension Twig pour l'aside
+Factories (difficulté ><')
+Recherche prestataire
+Fiche presta

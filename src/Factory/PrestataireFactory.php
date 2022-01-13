@@ -12,6 +12,7 @@ use Zenstruck\Foundry\Proxy;
 use Doctrine\ORM\EntityManagerInterface;
 
 use App\Factory\UserFactory;
+use App\Factory\PromotionFactory;
 
 /**
  * @extends ModelFactory<Prestataire>
@@ -45,6 +46,7 @@ final class PrestataireFactory extends ModelFactory
     {
         $nom = self::faker()->firstName();
         $nom = substr($nom, 0, 29);
+
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'nom' => $nom,
@@ -65,6 +67,10 @@ final class PrestataireFactory extends ModelFactory
                 $max = $max[0]->getId();
                 $service = $service->find(rand($max-29, $max));
                 $prestataire->addService($service);
+        
+                $promotion = PromotionFactory::createOne(["prestataire" => $prestataire, "service" => $service]);
+                // $prestataire->addPromotion($promotion);
+                
             })
         ;
     }
