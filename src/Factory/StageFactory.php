@@ -7,6 +7,7 @@ use App\Repository\StageRepository;
 use Zenstruck\Foundry\RepositoryProxy;
 use Zenstruck\Foundry\ModelFactory;
 use Zenstruck\Foundry\Proxy;
+use DateTime;
 
 /**
  * @extends ModelFactory<Stage>
@@ -37,16 +38,22 @@ final class StageFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
+        $depart = new DateTime();
+        $nbrJour = rand(30, 365);
+        $fin = new DateTime();
+        $fin->setTimestamp($fin->getTimestamp() + ($nbrJour * 86400));
+        $debutAffichage = new DateTime();
+        
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
-            'nom' => self::faker()->text(),
-            'description' => self::faker()->text(),
-            'tarif' => self::faker()->text(),
-            'infoComplementaires' => self::faker()->text(),
-            'debut' => null, // TODO add DATETIME ORM type manually
-            'fin' => null, // TODO add DATETIME ORM type manually
-            'affichageDe' => null, // TODO add DATETIME ORM type manually
-            'affichaqueJusque' => null, // TODO add DATETIME ORM type manually
+            'nom' => self::faker()->company(),
+            'description' => self::faker()->text(60),
+            'tarif' => self::faker()->numberBetween(10, 50),
+            'infoComplementaires' => self::faker()->text(30),
+            'debut' => $depart,
+            'fin' => $fin,
+            'affichageDe' => $debutAffichage->setTimestamp($depart->getTimestamp() - (rand(7,60) * 86400)),
+            'afficheJusque' => $fin
         ];
     }
 

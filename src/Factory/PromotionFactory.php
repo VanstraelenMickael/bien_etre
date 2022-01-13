@@ -49,6 +49,7 @@ final class PromotionFactory extends ModelFactory
         $nbrJour = rand(30, 365);
         $fin = new DateTime();
         $fin->setTimestamp($fin->getTimestamp() + ($nbrJour * 86400));
+        $debutAffichage = new DateTime();
         
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
@@ -57,7 +58,7 @@ final class PromotionFactory extends ModelFactory
             'documentPdf' => new BinaryFileResponse($this->controller->getParameter('kernel.project_dir')."/public/assets/doc.pdf"),
             'debut' => $depart,
             'fin' => $fin,
-            'affichageDe' => new DateTime($depart->$depart->getTimestamp() - (rand(7,60) * 86400)),
+            'affichageDe' => $debutAffichage->setTimestamp($depart->getTimestamp() - (rand(7,60) * 86400)),
             'afficheJusque' => $fin
         ];
     }

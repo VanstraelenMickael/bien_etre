@@ -13,6 +13,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 use App\Factory\UserFactory;
 use App\Factory\PromotionFactory;
+use App\Factory\StageFactory;
 
 /**
  * @extends ModelFactory<Prestataire>
@@ -69,7 +70,7 @@ final class PrestataireFactory extends ModelFactory
                 $prestataire->addService($service);
         
                 $promotion = PromotionFactory::createOne(["prestataire" => $prestataire, "service" => $service]);
-                // $prestataire->addPromotion($promotion);
+                //$stage = StageFactory::createOne(["prestataire" => $prestataire]);
                 
             })
         ;

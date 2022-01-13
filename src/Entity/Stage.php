@@ -55,10 +55,10 @@ class Stage
     /**
      * @ORM\Column(type="datetime")
      */
-    private $affichaqueJusque;
+    private $afficheJusque;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="stages")
+     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="stages", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $prestataire;
@@ -152,14 +152,14 @@ class Stage
         return $this;
     }
 
-    public function getAffichaqueJusque(): ?\DateTimeInterface
+    public function getAfficherJusque(): ?\DateTimeInterface
     {
-        return $this->affichaqueJusque;
+        return $this->afficheJusque;
     }
 
-    public function setAffichaqueJusque(\DateTimeInterface $affichaqueJusque): self
+    public function setAffichaqueJusque(\DateTimeInterface $afficheJusque): self
     {
-        $this->affichaqueJusque = $affichaqueJusque;
+        $this->afficheJusque = $afficheJusque;
 
         return $this;
     }
