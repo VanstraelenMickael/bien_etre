@@ -41,6 +41,28 @@
 </div>
 <div class="bloc">
     <h2>Promotions</h2>
+    <table class="table table-striped">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Nom</th>
+                <th scope="col">Description</th>
+                <th scope="col">Document</th>
+                <th scope="col">Date de fin</th>
+                <th scope="col">Service</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for promotion in prestataire.promotions %}
+            <tr>
+                <td>{{promotion.nom}}</td>
+                <td>{{promotion.description}}</td>
+                <td>doc</td>
+                <td>{{promotion.fin.format('d-m-Y')}}</td>
+                <td>{{promotion.service.nom}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>
 <div class="bloc">
     <h2>Stages</h2>

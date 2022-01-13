@@ -57,7 +57,7 @@ final class PromotionFactory extends ModelFactory
             'documentPdf' => new BinaryFileResponse($this->controller->getParameter('kernel.project_dir')."/public/assets/doc.pdf"),
             'debut' => $depart,
             'fin' => $fin,
-            'affichageDe' => $depart->setTimestamp($depart->getTimestamp() - (rand(7,60) * 86400)),
+            'affichageDe' => new DateTime($depart->$depart->getTimestamp() - (rand(7,60) * 86400)),
             'afficheJusque' => $fin
         ];
     }
