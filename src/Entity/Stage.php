@@ -152,12 +152,12 @@ class Stage
         return $this;
     }
 
-    public function getAfficherJusque(): ?\DateTimeInterface
+    public function getAfficheJusque(): ?\DateTimeInterface
     {
         return $this->afficheJusque;
     }
 
-    public function setAffichaqueJusque(\DateTimeInterface $afficheJusque): self
+    public function setAfficheJusque(\DateTimeInterface $afficheJusque): self
     {
         $this->afficheJusque = $afficheJusque;
 

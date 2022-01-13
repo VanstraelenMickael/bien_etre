@@ -70,7 +70,7 @@ final class PrestataireFactory extends ModelFactory
                 $prestataire->addService($service);
         
                 $promotion = PromotionFactory::createOne(["prestataire" => $prestataire, "service" => $service]);
-                //$stage = StageFactory::createOne(["prestataire" => $prestataire]);
+                $stage = StageFactory::createOne(["prestataire" => $prestataire]);
                 
             })
         ;
