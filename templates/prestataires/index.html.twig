@@ -3,7 +3,7 @@
 {% block body %}
 {% if prestataires_form %}
 {% for prestataire in prestataires_form %}
-<a href=''><p>{{prestataire.nom}}</p></a>
+<a href='{{path('prestataire_details',{id: prestataire.id})}}'><p>{{prestataire.nom}}</p></a>
 {% endfor %}
 {% else %}
 <p>Aucun résultat ne correspond à ces critères de recherche.</p>

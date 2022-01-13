@@ -44,9 +44,15 @@ class CategorieDeServices
      */
     private $prestataires;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Promotion::class, mappedBy="service")
+     */
+    private $promotions;
+
     public function __construct()
     {
         $this->prestataires = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -124,6 +130,36 @@ class CategorieDeServices
     {
         if ($this->prestataires->removeElement($prestataire)) {
             $prestataire->removeService($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Promotion[]
+     */
+    public function getPromotions(): Collection
+    {
+        return $this->promotions;
+    }
+
+    public function addPromotion(Promotion $promotion): self
+    {
+        if (!$this->promotions->contains($promotion)) {
+            $this->promotions[] = $promotion;
+            $promotion->setService($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromotion(Promotion $promotion): self
+    {
+        if ($this->promotions->removeElement($promotion)) {
+            // set the owning side to null (unless already changed)
+            if ($promotion->getService() === $this) {
+                $promotion->setService(null);
+            }
         }
 
         return $this;

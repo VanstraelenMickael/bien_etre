@@ -12434,7 +12434,38 @@ a:hover {
 }
 
 .body_container {
-  margin: 25px 0px 50px 0px;
+  margin: 25px 0px 25px 0px;
+}
+
+.body_container .container {
+  padding: 25px;
+  border: 1px solid #38B972;
+}
+
+.body_container .container h2 {
+  color: #38B972;
+  font-size: 20px;
+  margin-bottom: 25px;
+}
+
+@media (min-width: 576px) {
+  .body_container .container h2 {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .body_container .container h2 {
+    font-size: 36px;
+  }
+}
+
+.container .bloc {
+  margin-bottom: 25px;
+}
+
+.container .fiche .row {
+  margin-bottom: 25px;
 }
 
 .btn_primary {

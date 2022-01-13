@@ -50,9 +50,21 @@ class Prestataire
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Stage::class, mappedBy="prestataire")
+     */
+    private $stages;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Promotion::class, mappedBy="prestataire")
+     */
+    private $promotions;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
+        $this->stages = new ArrayCollection();
+        $this->promotions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -140,6 +152,66 @@ class Prestataire
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Stage[]
+     */
+    public function getStages(): Collection
+    {
+        return $this->stages;
+    }
+
+    public function addStage(Stage $stage): self
+    {
+        if (!$this->stages->contains($stage)) {
+            $this->stages[] = $stage;
+            $stage->setPrestataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStage(Stage $stage): self
+    {
+        if ($this->stages->removeElement($stage)) {
+            // set the owning side to null (unless already changed)
+            if ($stage->getPrestataire() === $this) {
+                $stage->setPrestataire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Promotion[]
+     */
+    public function getPromotions(): Collection
+    {
+        return $this->promotions;
+    }
+
+    public function addPromotion(Promotion $promotion): self
+    {
+        if (!$this->promotions->contains($promotion)) {
+            $this->promotions[] = $promotion;
+            $promotion->setPrestataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removePromotion(Promotion $promotion): self
+    {
+        if ($this->promotions->removeElement($promotion)) {
+            // set the owning side to null (unless already changed)
+            if ($promotion->getPrestataire() === $this) {
+                $promotion->setPrestataire(null);
+            }
+        }
 
         return $this;
     }
