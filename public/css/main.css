@@ -12433,6 +12433,15 @@ a:hover {
           align-items: center;
 }
 
+.flex-container form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 50px;
+}
+
 .body_container {
   margin: 25px 0px 25px 0px;
 }
@@ -12887,5 +12896,10 @@ aside .categorie a:hover {
   .hamburger {
     width: 0px;
   }
+}
+
+#register .btn_primary {
+  display: block;
+  width: 30%;
 }
 /*# sourceMappingURL=main.css.map */

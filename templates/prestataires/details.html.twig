@@ -2,93 +2,104 @@
 
 {% block body %}
 <div class="container">
-<div class="bloc">
-    <h2>Fiche Prestataire</h2>
-    <div class="fiche">
-        <div class="row">
-            <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-2">
-                <figure>
-                    <p>Photo : </p>
-                </figure>
-            </div>
-            <div class="col-12 col-sm-12 col-md-6 col-lg-9 col-xl-10">
-                <div class="row">
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                        <p>Nom : {{prestataire.user.internaute.nom}} {{prestataire.user.internaute.prenom}}</p>
+    <div class="bloc">
+        <h2>Fiche Prestataire</h2>
+        <div class="fiche">
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-6 col-lg-3 col-xl-2">
+                    <figure>
+                        <p>Photo : </p>
+                    </figure>
+                </div>
+                <div class="col-12 col-sm-12 col-md-6 col-lg-9 col-xl-10">
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                            <p>Nom : {{prestataire.user.internaute.nom}} {{prestataire.user.internaute.prenom}}</p>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                            <p>Adresse : {{prestataire.user.adresse}}, {{prestataire.user.adresseNum}} - {{prestataire.user.codePostal.codePostal}} - {{prestataire.user.localite.localite|upper}}</p>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                            <p>Adresse électronique : {{prestataire.user.email}}</p>
+                        </div>
                     </div>
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                        <p>Adresse : {{prestataire.user.adresse}}, {{prestataire.user.adresseNum}} - {{prestataire.user.codePostal.codePostal}} - {{prestataire.user.localite.localite|upper}}</p>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                        <p>Adresse électronique : {{prestataire.user.email}}</p>
+                    <div class="row">
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                            <p>Numéro de GSM : {{prestataire.numTel}}</p>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                            <p>Numéro de TVA : {{prestataire.numTva}}</p>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6 col-lg-4">
+                            <p><a href="{{prestataire.siteweb}}">Site web</a></p>
+                        </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                        <p>Numéro de GSM : {{prestataire.numTel}}</p>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                        <p>Numéro de TVA : {{prestataire.numTva}}</p>
-                    </div>
-                    <div class="col-6 col-sm-6 col-md-6 col-lg-4">
-                        <p><a href="{{prestataire.siteweb}}">Site web</a></p>
-                    </div>
-                </div>
             </div>
+            {# <p>Description : {{prestataire.description}}</p> #}
         </div>
-        {# <p>Description : {{prestataire.description}}</p> #}
     </div>
-</div>
-<div class="bloc">
-    <h2>Promotions</h2>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Description</th>
-                <th scope="col">Document</th>
-                <th scope="col">Date de fin</th>
-                <th scope="col">Service</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for promotion in prestataire.promotions %}
-            <tr>
-                <td>{{promotion.nom}}</td>
-                <td>{{promotion.description}}</td>
-                <td>doc</td>
-                <td>{{promotion.fin.format('d-m-Y')}}</td>
-                <td>{{promotion.service.nom}}</td>
-            </tr>
+    <div class="bloc">
+        <h2>Promotions</h2>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Document</th>
+                    <th scope="col">Date de fin</th>
+                    <th scope="col">Service</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for promotion in prestataire.promotions %}
+                <tr>
+                    <td>{{promotion.nom}}</td>
+                    <td>{{promotion.description}}</td>
+                    <td>doc</td>
+                    <td>{{promotion.fin.format('d-m-Y')}}</td>
+                    <td>{{promotion.service.nom}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="bloc">
+        <h2>Stages</h2>
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Tarifs</th>
+                    <th scope="col">Infos complémentaires</th>
+                    <th scope="col">Date de fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stage in prestataire.stages %}
+                <tr>
+                    <td>{{stage.nom}}</td>
+                    <td>{{stage.description}}</td>
+                    <td>{{stage.tarif}}€</td>
+                    <td>{{stage.infoComplementaires}}</td>
+                    <td>{{stage.fin.format('d-m-Y')}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <div class="bloc">
+        <h2>Services</h2>
+        <div class="services">
+            {% for service in prestataire.services %}
+            <article>
+                <figure></figure>
+                <p><a href="{{path('services', {id: service.id})}}">{{service.nom}}</a></p>
+            </article>
             {% endfor %}
-        </tbody>
-    </table>
-</div>
-<div class="bloc">
-    <h2>Stages</h2>
-    <table class="table table-striped">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col">Nom</th>
-                <th scope="col">Description</th>
-                <th scope="col">Tarifs</th>
-                <th scope="col">Infos complémentaires</th>
-                <th scope="col">Date de fin</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for stage in prestataire.stages %}
-            <tr>
-                <td>{{stage.nom}}</td>
-                <td>{{stage.description}}</td>
-                <td>{{stage.tarif}}€</td>
-                <td>{{stage.infoComplementaires}}</td>
-                <td>{{stage.fin.format('d-m-Y')}}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+        </div>
+    </div>
 </div>
 {% endblock %}
 

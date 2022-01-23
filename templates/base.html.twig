@@ -34,7 +34,9 @@
                     {% block body %}
                     {% endblock %}
                     </div>
-                    {% include 'components/square.html.twig' %}
+                    {% block square %}
+                        {% include 'components/square.html.twig' %}
+                    {% endblock %}
                 </div>
             </div>
         </div>

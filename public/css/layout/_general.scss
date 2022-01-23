@@ -25,3 +25,9 @@ a:hover{
     justify-content: space-around;
     align-items: center;
 }
+
+.flex-container form{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}

@@ -4,11 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -90,6 +92,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\JoinColumn(onDelete="CASCADE") 
      */
     private $internaute;
+
+    // /**
+    //  * @ORM\Column(type="boolean")
+    //  */
+    // private $isVerified = false;
 
     public function getId(): ?int
     {
@@ -320,6 +327,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPrestataire(?Prestataire $prestataire): self
     {
         $this->prestataire = $prestataire;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->inscriptConfirm;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->inscriptConfirm = $isVerified;
 
         return $this;
     }
