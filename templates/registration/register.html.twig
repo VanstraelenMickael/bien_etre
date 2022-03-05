@@ -14,9 +14,12 @@
         <div class="flex-container">
         {{ form_start(registrationForm) }}
             {{ form_row(registrationForm.email) }}
+            {{ form_row(registrationForm.plainPassword) }}
             {{ form_row(registrationForm.adresse) }}
             {{ form_row(registrationForm.adresseNum) }}
-            {{ form_row(registrationForm.plainPassword) }}
+            {{ form_row(registrationForm.localite) }}
+            {{ form_row(registrationForm.codePostal) }}
+            {{ form_row(registrationForm.commune) }}
             {{ form_row(registrationForm.agreeTerms) }}
             
             <button type="submit" class="btn_primary">S'enregistrer</button>

@@ -1,19 +1,26 @@
-<aside>
+<aside>             {% if app.user %}
+                        <div class="wrapper" id="connexion">
+                            <h2>Vous êtes connecté</h2>
+                        </div>
+                    {% else %}
                         <div class="wrapper" id="connexion">
                             <h2>Se connecter</h2>
                             <div class="wrapper_content">
-                                <form>
+                                <form method="post" action={{path('app_login')}}>
                                 <div class="form-group">
-                                    <label>Nom d'utilisateur</label>
-                                    <input type="text" class="username form-control"/>
+                                    <label for="inputEmail">Email</label>
+                                    <input type="email" value="" name="email" id="inputEmail" class="username form-control" autocomplete="email" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Mot de passe</label>
-                                    <input type="password" class="password form-control"/>
+                                    <label for="inputPassword">Mot de passe</label>
+                                    <input type="password" name="password" id="inputPassword" class="password form-control" autocomplete="current-password" required>
                                 </div>
+                                <input type="hidden" name="_csrf_token"
+                                    value="{{ csrf_token('authenticate') }}"
+                                >
                                 <div class="form-check flex-around">
                                     <div>
-                                    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" name="_remember_me">
                                     <label class="form-check-label" for="exampleCheck1">Se souvenir de moi</label>
                                     </div>
                                     <a href="{{path('app_register')}}">S'inscrire</a>
@@ -22,6 +29,7 @@
                                 </form>
                             </div>
                         </div>
+                        {% endif %}
                         <div class="wrapper" id="recherche">
                             <h2 id="titre_recherche"><i class="fas fa-angle-down icon"></i> Rechercher</h2>
                             <div class="wrapper_content {% if closed %}wrapper_content_close{% endif %}" id="recherche_content">

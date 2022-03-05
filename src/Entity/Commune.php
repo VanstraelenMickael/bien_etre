@@ -80,4 +80,10 @@ class Commune
 
         return $this;
     }
+
+    public function __toString(): string
+    {
+        return $this->getCommune();
+    }
+
 }

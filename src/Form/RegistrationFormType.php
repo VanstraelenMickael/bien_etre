@@ -13,9 +13,14 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-use App\Repository\CodePostalRepository;
-use App\Repository\CommuneRepository;
-use App\Repository\LocaliteRepository;
+use App\Entity\Localite;
+use App\Entity\CodePostal;
+use App\Entity\Commune;
+use Doctrine\ORM\EntityManager;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 
 class RegistrationFormType extends AbstractType
 {
@@ -30,12 +35,39 @@ class RegistrationFormType extends AbstractType
             ->add('adresse', null, [
                 'label' => "Adresse",
                 'attr' => ['class' => 'form-control'],
-                'row_attr' => ['class' => 'form-group col-12 col-sm-10 col-lg-5 col-xl-5']
+                'row_attr' => ['class' => 'form-group col-12 col-sm-10 col-lg-8 col-xl-8']
             ])
             ->add('adresseNum', NumberType::class, [
                 'label' => "N°",
                 'attr' => ['class' => 'form-control'],
                 'row_attr' => ['class' => 'form-group col-12 col-sm-2 col-lg-2 col-xl-2']
+            ])
+            ->add('localite', EntityType::class, [
+                'class' => Localite::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('l')
+                        ->orderBy('l.localite', 'ASC');
+                },
+                'attr' => ['class' => 'form-select'],
+                'row_attr' => ['class' => 'col-4'],
+            ])
+            ->add('codePostal', EntityType::class, [
+                'class' => CodePostal::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('l')
+                        ->orderBy('l.codePostal', 'ASC');
+                },
+                'attr' => ['class' => 'form-select'],
+                'row_attr' => ['class' => 'col-2'],
+            ])
+            ->add('commune', EntityType::class, [
+                'class' => Commune::class,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('l')
+                        ->orderBy('l.commune', 'ASC');
+                },
+                'attr' => ['class' => 'form-select'],
+                'row_attr' => ['class' => 'col-4'],
             ])
             ->add('agreeTerms', CheckboxType::class, [
                 'label' => "J'accepte les CGU",
@@ -73,7 +105,7 @@ class RegistrationFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => User::class
         ]);
     }
 }
