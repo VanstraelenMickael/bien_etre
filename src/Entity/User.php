@@ -93,6 +93,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $internaute;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Prestataire::class, cascade={"persist", "remove"})
+     */
+    private $prestataire;
+
     // /**
     //  * @ORM\Column(type="boolean")
     //  */

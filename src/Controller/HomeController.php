@@ -38,6 +38,12 @@ class HomeController extends AbstractController
         $repository = $entitymanager->getRepository(Internaute::class);
         $internaute = $repository->findLastAvailable();
 
+        $user = $this->getUser();
+        if(!$user->getPrestataire() || !$user->getInternaute()){
+            // Redirect form fin inscription
+            //return $this->redirectToRoute('home');
+        }
+
         return $this->render('home/index.html.twig', [
             "prestataires" => $prestataires,
             "categorieEnAvant" => $enAvant[0],

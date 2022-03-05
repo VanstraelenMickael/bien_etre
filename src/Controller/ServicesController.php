@@ -36,7 +36,7 @@ class ServicesController extends AbstractController
         return $this->render('services/index.html.twig', [
             "prestataires" => $prestataires,
             "categorieEnAvant" => $enAvant[0],
-            "service" => $service
+            "service" => $service,
         ]);
     }
 }

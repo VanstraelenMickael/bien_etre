@@ -6,11 +6,13 @@ use App\Entity\CodePostal;
 use App\Entity\Commune;
 use App\Entity\Localite;
 use App\Entity\User;
+use App\Form\RegistrationChoiceType;
 use App\Form\RegistrationFormType;
 use App\Repository\CodePostalRepository;
 use App\Repository\CommuneRepository;
 use App\Repository\LocaliteRepository;
 use App\Security\EmailVerifier;
+use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -75,7 +77,7 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('vanstraelm@isl-edu.be', 'Annuaire Bien-Être'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Merci de valider votre adresse mail')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
@@ -113,5 +115,25 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Votre mail a bien été confirmé.');
 
         return $this->redirectToRoute('home');
+    }
+
+    /**
+     * @Route("/register_two", name="app_register_end")
+     */
+    public function registerStepTwo(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        
+        $user = $this->getUser();
+        $form = $this->createForm(RegistrationChoiceType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            // redirect en fonction du choix de l'utilisateur
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('registration/register_two.html.twig', [
+            'registrationForm' => $form->createView(),
+        ]);
     }
 }
