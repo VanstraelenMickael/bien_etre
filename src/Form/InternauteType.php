@@ -29,6 +29,7 @@ class InternauteType extends AbstractType
             'row_attr' => ['class' => 'col-12 form-check'],
             'attr' => ['class' => 'form-check-input'],
             'mapped' => false,
+            'required' => false
         ])
         ;
     }

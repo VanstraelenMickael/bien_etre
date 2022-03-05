@@ -60,11 +60,17 @@ class Prestataire
      */
     private $promotions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="prestataire")
+     */
+    private $images;
+
     public function __construct()
     {
         $this->services = new ArrayCollection();
         $this->stages = new ArrayCollection();
         $this->promotions = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -210,6 +216,36 @@ class Prestataire
             // set the owning side to null (unless already changed)
             if ($promotion->getPrestataire() === $this) {
                 $promotion->setPrestataire(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Images[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setPrestataire($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getPrestataire() === $this) {
+                $image->setPrestataire(null);
             }
         }
 

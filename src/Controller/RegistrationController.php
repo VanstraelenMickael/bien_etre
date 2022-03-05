@@ -134,8 +134,17 @@ class RegistrationController extends AbstractController
         if ($formInternaute->isSubmitted() && $formInternaute->isValid()) {
             // create new Internaute
 
-            // $entityManager->persist($internaute);
-            // $entityManager->flush();
+            $newsletter = $internaute->getNewsletter();
+            if($newsletter != 1) $newsletter = 0;
+            $internaute->setNewsletter($newsletter);
+
+            $repository = $entityManager->getRepository(User::class);
+            $user = $repository->find($this->getUser()->getId());
+            $user->setInternaute($internaute);
+
+            $entityManager->persist($internaute);
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('home');
         }

@@ -39,7 +39,7 @@ class HomeController extends AbstractController
         $internaute = $repository->findLastAvailable();
 
         $user = $this->getUser();
-        if($user && (!$user->getPrestataire() || !$user->getInternaute())){
+        if($user && (!$user->getPrestataire() && !$user->getInternaute())){
             // Redirect form fin inscription
             return $this->redirectToRoute('app_register_end');
         }

@@ -12,12 +12,12 @@
 
         <h2>S'enregistrer</h2>
         <p>Afin de terminer votre inscription, veuillez définir votre rôle sur la plateforme</p>
-        <div class="choixRole">
-            <div id="prestataire">
+        <div class="choixRole row">
+            <div id="prestataire" class="col-12 col-lg-5 col-xl-5">
                 <h4>Prestataire</h4>
                 <p>Je propose un ou plusieurs services aux membres
             </div>
-            <div id="internaute">
+            <div id="internaute" class="col-12 col-lg-5 col-xl-5">
                 <h4>Internaute</h4>
                 <p>Je consulte les divers services proposés.
             </div>
@@ -37,7 +37,11 @@
             {{ form_row(prestataireForm.siteweb) }}
             {{ form_row(prestataireForm.numTel) }}
             {{ form_row(prestataireForm.numTva) }}
+            {{ form_row(prestataireForm.logo) }}
+            {{ form_row(prestataireForm.images) }}
+        <div class="col-12"> 
             <button type="submit" class="btn_primary">S'enregistrer</button>
+        </div>
         {{ form_end(prestataireForm) }}
         </div>
         </div>

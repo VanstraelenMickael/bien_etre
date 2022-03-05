@@ -52,27 +52,27 @@ $(function () {
   // Permet de choisir d'afficher le formulaire Prestataire ou Internaute
   let prestataireForm = $(".formPrestataire");
   let internauteForm = $(".formInternaute");
-  console.log(prestataireForm);
-  console.log(internauteForm);
   let choices = document.querySelectorAll(".choixRole div");
-  for (let choice of choices) {
-    choice.addEventListener("click", () => {
-      for (let c of choices) {
-        c.classList = "";
-      }
-      choice.classList = "selected";
-      let choiceName = choice.getAttribute("id");
+  if (choices) {
+    for (let choice of choices) {
+      choice.addEventListener("click", () => {
+        for (let c of choices) {
+          c.classList = "col-12 col-lg-5 col-xl-5";
+        }
+        choice.classList = "selected col-12 col-lg-5 col-xl-5";
+        let choiceName = choice.getAttribute("id");
 
-      switch (choiceName) {
-        case "prestataire":
-          prestataireForm.addClass("displayed");
-          internauteForm.removeClass("displayed");
-          break;
-        case "internaute":
-          internauteForm.addClass("displayed");
-          prestataireForm.removeClass("displayed");
-          break;
-      }
-    });
+        switch (choiceName) {
+          case "prestataire":
+            prestataireForm.addClass("displayed");
+            internauteForm.removeClass("displayed");
+            break;
+          case "internaute":
+            internauteForm.addClass("displayed");
+            prestataireForm.removeClass("displayed");
+            break;
+        }
+      });
+    }
   }
 });

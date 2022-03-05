@@ -12898,9 +12898,13 @@ aside .categorie a:hover {
   }
 }
 
+#register {
+  margin-bottom: 200px;
+}
+
 #register .btn_primary {
   display: block;
-  width: 30%;
+  width: auto;
 }
 
 .choixRole {
@@ -12927,7 +12931,6 @@ aside .categorie a:hover {
 }
 
 .choixRole div {
-  width: 30%;
   border: 1px solid #38B972;
   padding: 10px;
   -webkit-transition: 0.4s;
@@ -12948,5 +12951,11 @@ aside .categorie a:hover {
 
 .formRole.displayed {
   display: block;
+}
+
+@media (min-width: 768px) {
+  #register .btn_primary {
+    width: 30%;
+  }
 }
 /*# sourceMappingURL=main.css.map */

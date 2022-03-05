@@ -1,6 +1,10 @@
+#register {
+  margin-bottom: 200px;
+}
+
 #register .btn_primary {
   display: block;
-  width: 30%;
+  width: auto;
 }
 
 .choixRole {
@@ -21,7 +25,6 @@
 }
 
 .choixRole div {
-  width: 30%;
   border: 1px solid $main-color;
   padding: 10px;
   transition: 0.4s;
@@ -41,4 +44,10 @@
 
 .formRole.displayed {
   display: block;
+}
+
+@media (min-width: 768px) {
+  #register .btn_primary {
+    width: 30%;
+  }
 }

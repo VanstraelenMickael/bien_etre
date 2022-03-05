@@ -4,6 +4,17 @@ namespace App\Entity;
 
 use App\Repository\ImagesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\InternauteRepository;
+use Doctrine\Common\Collections\Collection;
+// use Vich\UploaderBundle\Entity\File;
+use Symfony\Component\Serializer\Serializer;
+
+use Symfony\Component\HttpFoundation\File\File;
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Serializer\Annotation\Ignore;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity(repositoryClass=ImagesRepository::class)
@@ -23,9 +34,32 @@ class Images
     private $ordre;
 
     /**
-     * @ORM\Column(type="blob")
+     * @ORM\Column(type="string", length=255)
      */
     private $image;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $updateAt;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Internaute::class, inversedBy="images")
+     */
+    private $internaute;
+
+    /**
+     * @Vich\UploadableField(mapping="Images", fileNameProperty="avatarname")
+     * @Ignore()
+     */
+    private $ImageFile;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="images")
+     */
+    private $prestataire;
+
+    
 
     public function getId(): ?int
     {
@@ -52,6 +86,58 @@ class Images
     public function setImage($image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeInterface
+    {
+        return $this->updateAt;
+    }
+
+    public function setUpdateAt(?\DateTimeInterface $updateAt): self
+    {
+        $this->updateAt = $updateAt;
+
+        return $this;
+    }
+
+    public function getInternaute(): ?Internaute
+    {
+        return $this->internaute;
+    }
+
+    public function setInternaute(?Internaute $internaute): self
+    {
+        $this->internaute = $internaute;
+
+        return $this;
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+
+    public function setImageFile(?file $image = null): void
+    {
+        $this->imageFile = $image;
+
+        if (null !== $image) {
+
+            $this->updatedAt = new \DateTime();
+        }
+    }
+
+    public function getPrestataire(): ?Prestataire
+    {
+        return $this->prestataire;
+    }
+
+    public function setPrestataire(?Prestataire $prestataire): self
+    {
+        $this->prestataire = $prestataire;
 
         return $this;
     }
