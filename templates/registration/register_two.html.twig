@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block square %}{% endblock %}
+
+{% block body %}
+    <div class="container" id="register">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        <h2>S'enregistrer</h2>
+        <p>Afin de terminer votre inscription, veuillez définir votre rôle sur la plateforme</p>
+        <div class="choixRole">
+            <div id="prestataire">
+                <h4>Prestataire</h4>
+                <p>Je propose un ou plusieurs services aux membres
+            </div>
+            <div id="internaute">
+                <h4>Internaute</h4>
+                <p>Je consulte les divers services proposés.
+            </div>
+        </div>
+        <div class="flex-container">
+        <div class="formInternaute formRole">
+        {{ form_start(internauteForm) }}
+            {{ form_row(internauteForm.nom) }}
+            {{ form_row(internauteForm.prenom) }}
+            {{ form_row(internauteForm.newsletter) }}
+            <button type="submit" class="btn_primary">S'enregistrer</button>
+        {{ form_end(internauteForm) }}
+        </div>
+        <div class="formPrestataire formRole">
+        {{ form_start(prestataireForm) }}
+            {{ form_row(prestataireForm.nom) }}
+            {{ form_row(prestataireForm.siteweb) }}
+            {{ form_row(prestataireForm.numTel) }}
+            {{ form_row(prestataireForm.numTva) }}
+            <button type="submit" class="btn_primary">S'enregistrer</button>
+        {{ form_end(prestataireForm) }}
+        </div>
+        </div>
+    </div>
+{% endblock %}

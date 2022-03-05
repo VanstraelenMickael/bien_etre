@@ -1,4 +1,44 @@
-#register .btn_primary{
-    display: block;
-    width: 30%;
+#register .btn_primary {
+  display: block;
+  width: 30%;
+}
+
+.choixRole {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  gap: 20px;
+}
+
+.choixRole h4 {
+  font-size: 1.2rem;
+}
+
+.choixRole p {
+  font-style: italic;
+}
+
+.choixRole div {
+  width: 30%;
+  border: 1px solid $main-color;
+  padding: 10px;
+  transition: 0.4s;
+}
+
+.choixRole div:hover {
+  cursor: pointer;
+}
+
+.choixRole div.selected {
+  background-color: $main-color;
+}
+
+.formRole {
+  display: none;
+}
+
+.formRole.displayed {
+  display: block;
 }

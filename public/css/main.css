@@ -12902,4 +12902,51 @@ aside .categorie a:hover {
   display: block;
   width: 30%;
 }
+
+.choixRole {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  gap: 20px;
+}
+
+.choixRole h4 {
+  font-size: 1.2rem;
+}
+
+.choixRole p {
+  font-style: italic;
+}
+
+.choixRole div {
+  width: 30%;
+  border: 1px solid #38B972;
+  padding: 10px;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.choixRole div:hover {
+  cursor: pointer;
+}
+
+.choixRole div.selected {
+  background-color: #38B972;
+}
+
+.formRole {
+  display: none;
+}
+
+.formRole.displayed {
+  display: block;
+}
 /*# sourceMappingURL=main.css.map */

@@ -39,9 +39,9 @@ class HomeController extends AbstractController
         $internaute = $repository->findLastAvailable();
 
         $user = $this->getUser();
-        if(!$user->getPrestataire() || !$user->getInternaute()){
+        if($user && (!$user->getPrestataire() || !$user->getInternaute())){
             // Redirect form fin inscription
-            //return $this->redirectToRoute('home');
+            return $this->redirectToRoute('app_register_end');
         }
 
         return $this->render('home/index.html.twig', [

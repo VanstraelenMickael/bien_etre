@@ -6,6 +6,10 @@ use App\Entity\CodePostal;
 use App\Entity\Commune;
 use App\Entity\Localite;
 use App\Entity\User;
+use App\Entity\Prestataire;
+use App\Entity\Internaute;
+use App\Form\InternauteType;
+use App\Form\PrestataireType;
 use App\Form\RegistrationChoiceType;
 use App\Form\RegistrationFormType;
 use App\Repository\CodePostalRepository;
@@ -118,22 +122,41 @@ class RegistrationController extends AbstractController
     }
 
     /**
-     * @Route("/register_two", name="app_register_end")
+     * @Route("/register_step_two", name="app_register_end")
      */
     public function registerStepTwo(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
-        
-        $user = $this->getUser();
-        $form = $this->createForm(RegistrationChoiceType::class, $user);
-        $form->handleRequest($request);
+        $internaute = new Internaute();
+        $internaute->setUser($this->getUser());
+        $formInternaute = $this->createForm(InternauteType::class, $internaute);
+        $formInternaute->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // redirect en fonction du choix de l'utilisateur
+        if ($formInternaute->isSubmitted() && $formInternaute->isValid()) {
+            // create new Internaute
+
+            // $entityManager->persist($internaute);
+            // $entityManager->flush();
+
+            return $this->redirectToRoute('home');
+        }
+
+        $prestataire = new Prestataire();
+        $prestataire->setUser($this->getUser());
+        $formPrestataire = $this->createForm(PrestataireType::class, $prestataire);
+        $formPrestataire->handleRequest($request);
+
+        if ($formPrestataire->isSubmitted() && $formPrestataire->isValid()) {
+            // create new Internaute
+
+            // $entityManager->persist($prestataire);
+            // $entityManager->flush();
+
             return $this->redirectToRoute('home');
         }
 
         return $this->render('registration/register_two.html.twig', [
-            'registrationForm' => $form->createView(),
+            'prestataireForm' => $formPrestataire->createView(),
+            'internauteForm' => $formInternaute->createView(),
         ]);
     }
 }
