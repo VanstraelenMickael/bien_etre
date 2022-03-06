@@ -61,7 +61,7 @@ class Prestataire
     private $promotions;
 
     /**
-     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="prestataire")
+     * @ORM\OneToMany(targetEntity=Images::class, cascade={"persist", "remove"}, mappedBy="prestataire")
      */
     private $images;
 
@@ -238,6 +238,14 @@ class Prestataire
         }
 
         return $this;
+    }
+
+    public function getLogo(){
+        foreach($this->getImages() as $img){
+            if($img->getOrdre() == 0){
+                return $img;
+            }
+        }
     }
 
     public function removeImage(Images $image): self

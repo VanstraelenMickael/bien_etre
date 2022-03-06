@@ -12697,6 +12697,7 @@ aside .categorie a:hover {
 }
 
 #slider {
+  position: relative;
   width: 100%;
   height: 300px;
   background-color: grey;
@@ -12711,7 +12712,8 @@ aside .categorie a:hover {
           justify-content: space-between;
 }
 
-#slider .prev, #slider .next {
+#slider .prev,
+#slider .next {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12722,15 +12724,35 @@ aside .categorie a:hover {
       -ms-flex-pack: center;
           justify-content: center;
   height: 100%;
-  width: 5%;
+  width: 10%;
   font-size: 48px;
   color: #38B972;
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-#slider .prev:hover, #slider .next:hover {
+#slider .prev:hover,
+#slider .next:hover {
   color: #298954;
   cursor: pointer;
+}
+
+#slider figure {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+#slider figure img {
+  position: relative;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  #slider figure img {
+    position: relative;
+    height: unset;
+    width: 100%;
+  }
 }
 
 #square {
@@ -12896,6 +12918,14 @@ aside .categorie a:hover {
   .hamburger {
     width: 0px;
   }
+}
+
+.reminder {
+  background-color: #38B972;
+  width: 100%;
+  padding: 5px;
+  text-align: center;
+  color: white;
 }
 
 #register {

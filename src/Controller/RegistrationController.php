@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\CodePostal;
 use App\Entity\Commune;
+use App\Entity\Images;
 use App\Entity\Localite;
 use App\Entity\User;
 use App\Entity\Prestataire;
@@ -22,9 +23,12 @@ use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Mime\Address;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mime\Address;
+use Symfony\Component\Form\Form;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\HttpFoundation\File\Exception\FileException;
+use Symfony\Component\HttpFoundation\File;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
@@ -156,9 +160,44 @@ class RegistrationController extends AbstractController
 
         if ($formPrestataire->isSubmitted() && $formPrestataire->isValid()) {
             // create new Internaute
+            $repository = $entityManager->getRepository(User::class);
+            $user = $repository->find($this->getUser()->getId());
+            $user->setPrestataire($prestataire);
 
-            // $entityManager->persist($prestataire);
-            // $entityManager->flush();
+            $logo = $formPrestataire->get('logo')->getViewData();
+
+            $nom_logo = md5(uniqid()).'.'.$logo->guessExtension();
+
+            $logo->move(
+                $this->getParameter('images_directory'), $nom_logo
+            );
+
+            $logo_img = new Images();
+            $logo_img->setImage($nom_logo);
+            $logo_img->setOrdre(0);
+            $logo_img->setPrestataire($prestataire);
+
+            $prestataire->addImage($logo_img);
+
+            $images = $formPrestataire->get('images')->getViewData();
+
+            foreach($images as $key => $image){
+                
+                $nom_image = md5(uniqid()).'.'.$image->guessExtension();
+                $image->move(
+                    $this->getParameter('images_directory'), $nom_image
+                );
+
+                $img = new Images();
+                $img->setImage($nom_image);
+                $img->setOrdre($key + 1);
+                $img->setUpdateAt(new DateTime());
+                $prestataire->addImage($img);
+            }
+
+            $entityManager->persist($prestataire);
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirectToRoute('home');
         }

@@ -1,33 +1,32 @@
-@import 'abstract/variables';
-@import 'abstract/functions';
-@import 'abstract/mixins';
-@import 'abstract/placeholders';
+@import "abstract/variables";
+@import "abstract/functions";
+@import "abstract/mixins";
+@import "abstract/placeholders";
 
-@import 'vendors/bootstrap/bootstrap';
+@import "vendors/bootstrap/bootstrap";
 
-@import 'base/reset';
-@import 'base/typography';
+@import "base/reset";
+@import "base/typography";
 
 // @import 'layout/grid';
-@import 'layout/navigation';
-@import 'layout/header';
-@import 'layout/sidebar';
-@import 'layout/forms';
-@import 'layout/general';
-@import 'layout/body_container';
+@import "layout/navigation";
+@import "layout/header";
+@import "layout/sidebar";
+@import "layout/forms";
+@import "layout/general";
+@import "layout/body_container";
 
-@import 'components/buttons';
-@import 'components/container';
-@import 'components/animations';
-@import 'components/wrapper';
-@import 'components/titles';
-@import 'components/footer';
-@import 'components/header';
-@import 'components/aside';
-@import 'components/slider';
-@import 'components/square';
-@import 'components/hamburger';
+@import "components/buttons";
+@import "components/container";
+@import "components/animations";
+@import "components/wrapper";
+@import "components/titles";
+@import "components/footer";
+@import "components/header";
+@import "components/aside";
+@import "components/slider";
+@import "components/square";
+@import "components/hamburger";
+@import "components/reminder";
 
-@import 'pages/register';
-
-
+@import "pages/register";

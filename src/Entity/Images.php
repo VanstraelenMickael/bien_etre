@@ -44,18 +44,12 @@ class Images
     private $updateAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Internaute::class, inversedBy="images")
+     * @ORM\ManyToOne(targetEntity=Internaute::class, cascade={"persist", "remove"}, inversedBy="images")
      */
     private $internaute;
 
     /**
-     * @Vich\UploadableField(mapping="Images", fileNameProperty="avatarname")
-     * @Ignore()
-     */
-    private $ImageFile;
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Prestataire::class, inversedBy="images")
+     * @ORM\ManyToOne(targetEntity=Prestataire::class, cascade={"persist", "remove"}, inversedBy="images")
      */
     private $prestataire;
 
@@ -140,5 +134,14 @@ class Images
         $this->prestataire = $prestataire;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->image;
+    }
+
+    public function slug(){
+        return "img/users/".$this->image;
     }
 }

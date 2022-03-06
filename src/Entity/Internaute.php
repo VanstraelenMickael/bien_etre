@@ -41,7 +41,7 @@ class Internaute
     private $user;
 
     /**
-     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="internaute")
+     * @ORM\OneToMany(targetEntity=Images::class, cascade={"persist", "remove"}, mappedBy="internaute")
      */
     private $images;
 

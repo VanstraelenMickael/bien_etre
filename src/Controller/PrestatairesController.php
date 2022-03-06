@@ -52,9 +52,12 @@ class PrestatairesController extends AbstractController
     public function details(EntityManagerInterface $entitymanager, Request $request, Prestataire $prestataire): Response
     {
         $services = $prestataire->getServices();
-        
         $repository = $entitymanager->getRepository(Prestataire::class);
-        $prestataires = $repository->findFromServices($services[0]->getId());
+        if($services != null && $services[0] != null) {
+            $prestataires = $repository->findFromServices($services[0]->getId());
+        }else{
+            $prestataires = $repository->findLatest();
+        }
 
         $repository = $entitymanager->getRepository(CategorieDeServices::class);
         $enAvant = $repository->findBy(

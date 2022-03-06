@@ -11,6 +11,11 @@
         {% endblock %}
     </head>
     <body>
+        {% if app.user %}
+            {% if app.user.InscriptConfirm == 0 %}
+            <div class='reminder'>Vous devez confirmer votre adresse mail ou votre compte sera suspendu après 48 heures</div>
+            {% endif %}
+        {% endif %}
         {% block header %}
         <div class="fluid-container">
             {% include 'components/hamburger.html.twig' %}

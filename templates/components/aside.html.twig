@@ -1,6 +1,9 @@
 <aside>             {% if app.user %}
                         <div class="wrapper" id="connexion">
                             <h2>Vous êtes connecté</h2>
+                            <div class="wrapper_content">
+                            <a href="{{path('app_logout')}}"><p>Se déconnecter</p></a>
+                            </div>
                         </div>
                     {% else %}
                         <div class="wrapper" id="connexion">
