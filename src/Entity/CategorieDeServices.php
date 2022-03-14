@@ -49,10 +49,16 @@ class CategorieDeServices
      */
     private $promotions;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Images::class, mappedBy="categorie")
+     */
+    private $images;
+
     public function __construct()
     {
         $this->prestataires = new ArrayCollection();
         $this->promotions = new ArrayCollection();
+        $this->images = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -168,5 +174,43 @@ class CategorieDeServices
     public function __toString(): string
     {
         return $this->getNom();
+    }
+
+    /**
+     * @return Collection|Images[]
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    public function addImage(Images $image): self
+    {
+        if (!$this->images->contains($image)) {
+            $this->images[] = $image;
+            $image->setCategorie($this);
+        }
+
+        return $this;
+    }
+
+    public function removeImage(Images $image): self
+    {
+        if ($this->images->removeElement($image)) {
+            // set the owning side to null (unless already changed)
+            if ($image->getCategorie() === $this) {
+                $image->setCategorie(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getBanner(){
+        foreach($this->getImages() as $img){
+            if($img->getOrdre() == 0){
+                return $img;
+            }
+        }
     }
 }

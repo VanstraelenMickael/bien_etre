@@ -53,6 +53,11 @@ class Images
      */
     private $prestataire;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=CategorieDeServices::class, inversedBy="images")
+     */
+    private $categorie;
+
     
 
     public function getId(): ?int
@@ -143,5 +148,21 @@ class Images
 
     public function slug(){
         return "img/users/".$this->image;
+    }
+
+    public function slugBanner(){
+        return "img/category/".$this->image;
+    }
+
+    public function getCategorie(): ?CategorieDeServices
+    {
+        return $this->categorie;
+    }
+
+    public function setCategorie(?CategorieDeServices $categorie): self
+    {
+        $this->categorie = $categorie;
+
+        return $this;
     }
 }

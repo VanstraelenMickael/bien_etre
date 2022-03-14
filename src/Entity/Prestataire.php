@@ -259,4 +259,23 @@ class Prestataire
 
         return $this;
     }
+
+    public function hasPromotions(){
+        $promotions = $this->getPromotions();
+        if(count($promotions) == 0) return false;
+        return true;
+    }
+
+    public function hasStages(){
+        $stages = $this->getStages();
+        if(count($stages) == 0) return false;
+        return true;
+    }
+
+    public function hasServices(){
+        $services = $this->getServices();
+        if(count($services) == 0) return false;
+        return true;
+    }
+    
 }

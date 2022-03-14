@@ -1,6 +1,6 @@
-<img src="
+<img class='square_logo' src="
                         {% if (prestataire.logo) %}
-                        {{asset(prestataire.logo.slug)}}
+                        {{asset(prestataire.logo.slug("users"))}}
                         {% else %}
                         {{asset('img/users/default.png')}}
                         {% endif %}

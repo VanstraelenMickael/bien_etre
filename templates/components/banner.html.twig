@@ -1,0 +1,7 @@
+<img class='square_logo' src="
+                        {% if (category.banner) %}
+                        {{asset(category.banner.slug("category"))}}
+                        {% else %}
+                        {{asset('img/category/default.png')}}
+                        {% endif %}
+                        ">
