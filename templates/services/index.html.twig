@@ -2,10 +2,10 @@
 
 {% block body %}
 <article>
-<figure>
-    <img src="../"/>
+<figure class="banner_container">
+    {% include 'components/banner.html.twig' %}
 </figure>
-<div>
+<div class="services_infos">
     <h1>{{service.nom}}</h1>
     <p>{{service.description}}</p>
 </div>

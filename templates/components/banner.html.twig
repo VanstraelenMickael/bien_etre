@@ -1,6 +1,6 @@
-<img class='square_logo' src="
-                        {% if (category.banner) %}
-                        {{asset(category.banner.slug("category"))}}
+<img class='banner' src="
+                        {% if (service.banner) %}
+                        {{asset(service.banner.slugBanner)}}
                         {% else %}
                         {{asset('img/category/default.png')}}
                         {% endif %}

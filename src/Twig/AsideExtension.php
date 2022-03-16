@@ -35,8 +35,8 @@ class AsideExtension extends AbstractExtension{
 
     public function getAside($closed = false): string{
         $categories = $this->categorie->findBy(
-            array(),
-            array('nom' => 'ASC')
+            array('valide' => '1'),
+            array('nom' => 'ASC'),
         );
 
         $localites = $this->localite->findBy(

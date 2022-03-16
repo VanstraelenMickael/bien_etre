@@ -1,0 +1,21 @@
+.banner_container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+.banner {
+  width: 100%;
+}
+
+.services_infos h1 {
+  @include title-size;
+  font-family: "Bebas Neue";
+}
+
+.services_infos p {
+  font-style: italic;
+}

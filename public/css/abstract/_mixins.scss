@@ -34,3 +34,13 @@
     font-size: 16px;
   }
 }
+
+@mixin title-size-bebas {
+  font-size: 26px;
+  @media (min-width: 576px) {
+    font-size: 20px;
+  }
+  @media (min-width: 1080px) {
+    font-size: 24px;
+  }
+}

@@ -89,7 +89,7 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
-
+            $this->addFlash('success', 'Inscription réussie. Veuillez valider votre adresse mail.');
             return $this->redirectToRoute('home');
         }
 
@@ -150,6 +150,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Inscription terminée. Vous êtes désormais un Internaute.');
             return $this->redirectToRoute('home');
         }
 
@@ -199,6 +200,7 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Inscription terminée. Vous êtes désormais un Prestataire.');
             return $this->redirectToRoute('home');
         }
 
