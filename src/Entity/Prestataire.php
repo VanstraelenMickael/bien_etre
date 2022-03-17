@@ -277,5 +277,11 @@ class Prestataire
         if(count($services) == 0) return false;
         return true;
     }
+
+    public function hasGalery(){
+        $images = $this->getImages();
+        if(count($images) <= 1) return false;
+        return true;
+    }
     
 }

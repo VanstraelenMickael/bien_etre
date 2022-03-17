@@ -12448,6 +12448,23 @@ a:hover {
   border: unset;
 }
 
+.title_category {
+  font-size: 20px;
+  font-family: "Bebas Neue";
+}
+
+@media (min-width: 576px) {
+  .title_category {
+    font-size: 28px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .title_category {
+    font-size: 36px;
+  }
+}
+
 .body_container {
   margin: 25px 0px 25px 0px;
 }
@@ -12964,6 +12981,14 @@ aside .categorie a:hover {
   padding: 5px;
   text-align: center;
   color: white;
+}
+
+.paginator {
+  margin-top: 10px;
+}
+
+.pagination {
+  gap: 5px;
 }
 
 #register {

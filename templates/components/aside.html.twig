@@ -36,7 +36,7 @@
                         <div class="wrapper" id="recherche">
                             <h2 id="titre_recherche"><i class="fas fa-angle-down icon"></i> Rechercher</h2>
                             <div class="wrapper_content {% if closed %}wrapper_content_close{% endif %}" id="recherche_content">
-                                <form action="{{path('prestataires')}}" method="post">
+                                <form action="{{path('prestataires')}}" method="get">
                                 <div class="form-group">
                                     <label>Catégories</label>
                                     <select name='categorie' id="category_select_search" class="form-select" aria-label="Default select example">

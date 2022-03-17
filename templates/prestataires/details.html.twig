@@ -3,7 +3,7 @@
 {% block body %}
 <div class="container" id="prestataire_details" >
     <div class="bloc">
-        <h2>Fiche Prestataire</h2>
+        <h2 class="title_category">Fiche Prestataire</h2>
         <div class="fiche">
             <div class="row">
                 <div class="col-6 col-sm-6 col-md-6 col-lg-3 col-xl-3">
@@ -40,9 +40,27 @@
             {# <p>Description : {{prestataire.description}}</p> #}
         </div>
     </div>
+    {% if prestataire.hasGalery %}
+    <div class="bloc">
+        <h2 class="title_category">Galerie</h2>
+        <div class="galery">
+            <div class="row">
+                {% for img in prestataire.images %}
+                {% if img.ordre != 0 %}
+                <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-3">
+                    <figure>
+                        <img src="{{img.slug}}">
+                    </figure>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endif %}
     {% if prestataire.hasPromotions %}
     <div class="bloc">
-        <h2>Promotions</h2>
+        <h2 class="title_category">Promotions</h2>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead class="thead-dark">
@@ -71,7 +89,7 @@
     {% endif %}
     {% if prestataire.hasStages %}
     <div class="bloc">
-        <h2>Stages</h2>
+        <h2 class="title_category">Stages</h2>
         <div class="table-responsive">
             <table class="table table-striped">
                 <thead class="thead-dark">
@@ -100,7 +118,7 @@
     {% endif %}
     {% if prestataire.hasServices %}
     <div class="bloc">
-        <h2>Services</h2>
+        <h2 class="title_category">Services</h2>
         <div class="services">
             {% if prestataire.services %}
                 {% for service in prestataire.services %}

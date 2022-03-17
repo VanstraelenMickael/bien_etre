@@ -9,7 +9,7 @@ use App\Entity\Commune;
 use App\Entity\CodePostal;
 use App\Entity\Localite;
 use Doctrine\ORM\EntityManagerInterface;
-
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +20,7 @@ class PrestatairesController extends AbstractController
     /**
      * @Route("/prestataires", name="prestataires")
      */
-    public function index(EntityManagerInterface $entitymanager, Request $request): Response
+    public function index(EntityManagerInterface $entitymanager, Request $request, PaginatorInterface $paginator): Response
     {
         $repository = $entitymanager->getRepository(CategorieDeServices::class);
         $enAvant = $repository->findBy(
@@ -38,11 +38,21 @@ class PrestatairesController extends AbstractController
         if(empty($prestataires_form)){
             $prestataires_form = false;
         }
+
+        if($prestataires_form){
+            $final_result = $paginator->paginate(
+                $prestataires_form, 
+                $request->query->getInt('page', 1),
+                10
+            );
+        }else{
+            $final_result = false;
+        }
         
         return $this->render('prestataires/index.html.twig', [
             "prestataires" => $prestataires,
             "categorieEnAvant" => $enAvant[0],
-            "prestataires_form" => $prestataires_form
+            "prestataires_form" => $final_result
         ]);
     }
 

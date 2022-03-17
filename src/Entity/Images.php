@@ -147,11 +147,11 @@ class Images
     }
 
     public function slug(){
-        return "img/users/".$this->image;
+        return "/img/users/".$this->image;
     }
 
     public function slugBanner(){
-        return "img/category/".$this->image;
+        return "/img/category/".$this->image;
     }
 
     public function getCategorie(): ?CategorieDeServices

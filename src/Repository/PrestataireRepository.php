@@ -68,12 +68,11 @@ class PrestataireRepository extends ServiceEntityRepository
      */
     public function findFromForm($request)
     {
-        $categorie = $request->request->get('categorie');
-        $nom = $request->request->get('nom');
-        $categorie = $request->request->get('categorie');
-        $codePostal = $request->request->get('codePostal');
-        $commune = $request->request->get('commune');
-        $localite = $request->request->get('localite');
+        $nom = $request->query->get('nom');
+        $categorie = $request->query->get('categorie');
+        $codePostal = $request->query->get('codePostal');
+        $commune = $request->query->get('commune');
+        $localite = $request->query->get('localite');
 
         $qb = $this->createQueryBuilder('p')
             ->orderBy('p.nom', 'ASC')

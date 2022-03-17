@@ -1,11 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+<div class="bloc">
+<h2 class='title_category'>Prestataires</h2>
 {% if prestataires_form %}
 {% for prestataire in prestataires_form %}
 <a href='{{path('prestataire_details',{id: prestataire.id})}}'><p>{{prestataire.nom}}</p></a>
 {% endfor %}
+<div class="paginator">
+    {{ knp_pagination_render(prestataires_form) }}
+</div>
 {% else %}
 <p>Aucun résultat ne correspond à ces critères de recherche.</p>
 {% endif %}
+</div>
 {% endblock %}
