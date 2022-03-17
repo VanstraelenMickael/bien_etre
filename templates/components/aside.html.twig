@@ -2,7 +2,10 @@
                         <div class="wrapper" id="connexion">
                             <h2>Vous êtes connecté</h2>
                             <div class="wrapper_content">
-                            <a href="{{path('app_logout')}}"><p>Se déconnecter</p></a>
+                                <div class="row">
+                                <a href="">Mon profil</a>
+                                <a href="{{path('app_logout')}}"><p>Se déconnecter</p></a>
+                                </div>
                             </div>
                         </div>
                     {% else %}
