@@ -23,6 +23,12 @@ class HomeController extends AbstractController
      */
     public function home(EntityManagerInterface $entitymanager): Response
     {
+        $user = $this->getUser();
+        if($user && (!$user->getPrestataire() && !$user->getInternaute())){
+            // Redirect form fin inscription
+            return $this->redirectToRoute('app_register_end');
+        }
+        
         $repository = $entitymanager->getRepository(CategorieDeServices::class);
         $enAvant = $repository->findBy(
             array('enAvant' => '1')
@@ -37,12 +43,6 @@ class HomeController extends AbstractController
 
         $repository = $entitymanager->getRepository(Internaute::class);
         $internaute = $repository->findLastAvailable();
-
-        $user = $this->getUser();
-        if($user && (!$user->getPrestataire() && !$user->getInternaute())){
-            // Redirect form fin inscription
-            return $this->redirectToRoute('app_register_end');
-        }
 
         return $this->render('home/index.html.twig', [
             "prestataires" => $prestataires,

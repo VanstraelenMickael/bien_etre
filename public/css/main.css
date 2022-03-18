@@ -13098,4 +13098,8 @@ aside .categorie a:hover {
 .services_infos p {
   font-style: italic;
 }
+
+#update_informations .btn_primary {
+  width: 30%;
+}
 /*# sourceMappingURL=main.css.map */
