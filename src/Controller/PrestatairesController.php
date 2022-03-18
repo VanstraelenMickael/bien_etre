@@ -22,6 +22,12 @@ class PrestatairesController extends AbstractController
      */
     public function index(EntityManagerInterface $entitymanager, Request $request, PaginatorInterface $paginator): Response
     {
+        $user = $this->getUser();
+        if($user && (!$user->getPrestataire() && !$user->getInternaute())){
+            // Redirect form fin inscription
+            return $this->redirectToRoute('app_register_end');
+        }
+        
         $repository = $entitymanager->getRepository(CategorieDeServices::class);
         $enAvant = $repository->findBy(
             array('enAvant' => '1')
@@ -61,6 +67,12 @@ class PrestatairesController extends AbstractController
      */
     public function details(EntityManagerInterface $entitymanager, Request $request, Prestataire $prestataire): Response
     {
+        $user = $this->getUser();
+        if($user && (!$user->getPrestataire() && !$user->getInternaute())){
+            // Redirect form fin inscription
+            return $this->redirectToRoute('app_register_end');
+        }
+
         $services = $prestataire->getServices();
         $repository = $entitymanager->getRepository(Prestataire::class);
         if($services != null && $services[0] != null) {

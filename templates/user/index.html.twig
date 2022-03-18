@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block square %}
+{% endblock %}
+
+{% block body %}
+<div class="bloc" id="update_informations">
+<h2 class='title_category'>Mon profil</h2><br>
+
+{% if role == "prestataire" %}
+<div class="formPrestataire flex-container">
+        {{ form_start(form) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.siteweb) }}
+            {{ form_row(form.numTel) }}
+            {{ form_row(form.numTva) }}
+            {{ form_row(form.logo) }}
+            {{ form_row(form.images) }}
+        <div class="col-12"> 
+            <button type="submit" class="btn_primary">Sauvegarder</button>
+        </div>
+        {{ form_end(form) }}
+        </div>
+{% endif %}
+
+{% if role == "internaute" %}
+<div class="formInternaute flex-container">
+    {{dump(form)}}
+        {{ form_start(form) }}
+            {{ form_row(form.nom) }}
+            {{ form_row(form.prenom) }}
+            {{ form_row(form.newsletter) }}
+            <button type="submit" class="btn_primary">Sauvegarder</button>
+        {{ form_end(form) }}
+        </div>
+{% endif %}
+</div>
+
+{% endblock %}

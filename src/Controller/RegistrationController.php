@@ -45,6 +45,12 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        if($user){
+            // Redirect form home
+            return $this->redirectToRoute('home');
+        }
+        
         $repository = $entityManager->getRepository(CodePostal::class);
         $codePostaux = $repository->findBy(
             array(),
@@ -130,6 +136,12 @@ class RegistrationController extends AbstractController
      */
     public function registerStepTwo(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+        $user = $this->getUser();
+        if($user && ($user->getPrestataire() || $user->getInternaute())){
+            // Redirect form home
+            return $this->redirectToRoute('home');
+        }
+
         $internaute = new Internaute();
         $internaute->setUser($this->getUser());
         $formInternaute = $this->createForm(InternauteType::class, $internaute);
@@ -205,6 +217,7 @@ class RegistrationController extends AbstractController
         }
 
         return $this->render('registration/register_two.html.twig', [
+            'inscriptConfirm' => $this->getUser()->getInscriptConfirm(), 
             'prestataireForm' => $formPrestataire->createView(),
             'internauteForm' => $formInternaute->createView(),
         ]);

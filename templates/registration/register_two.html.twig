@@ -11,6 +11,7 @@
         {% endfor %}
 
         <h2>S'enregistrer</h2>
+        {% if inscriptConfirm %}
         <p>Afin de terminer votre inscription, veuillez définir votre rôle sur la plateforme</p>
         <div class="choixRole row">
             <div id="prestataire" class="col-12 col-lg-5 col-xl-5">
@@ -45,5 +46,8 @@
         {{ form_end(prestataireForm) }}
         </div>
         </div>
+        {% else %}
+            <p>Vous devez confirmer votre adresse mail avant de continuer sur la plateforme.</p>
+        {% endif %}
     </div>
 {% endblock %}
