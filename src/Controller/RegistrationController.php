@@ -50,24 +50,6 @@ class RegistrationController extends AbstractController
             // Redirect form home
             return $this->redirectToRoute('home');
         }
-        
-        $repository = $entityManager->getRepository(CodePostal::class);
-        $codePostaux = $repository->findBy(
-            array(),
-            array('codePostal' => 'ASC')
-        );
-
-        $repository = $entityManager->getRepository(Localite::class);
-        $localites = $repository->findBy(
-            array(),
-            array('localite' => 'ASC')
-        );
-
-        $repository = $entityManager->getRepository(Commune::class);
-        $communes = $repository->findBy(
-            array(),
-            array('commune' => 'ASC')
-        );
 
         $user = new User();
         $user->setInscription(new DateTime());

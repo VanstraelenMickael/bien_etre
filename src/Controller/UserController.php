@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\CategorieDeServices;
 use App\Entity\Images;
+use App\Form\AddServiceType;
 use App\Form\InternauteType;
 use App\Form\PrestataireType;
 use DateTime;
@@ -110,8 +112,36 @@ class UserController extends AbstractController
 
         return $this->render('user/index.html.twig', [
             'form' => $form->createView(),
-            'role' => $role,
-            'controller_name' => 'UserController',
+            'role' => $role
+        ]);
+    }
+
+    /**
+     * @Route("/me/category", name="my_categories")
+     */
+    public function gestion_category(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        if($this->getUser() && $this->getUser()->getPrestataire()){
+            $prestataire = $this->getUser()->getPrestataire();
+            $repository = $entityManager->getRepository(CategorieDeServices::class);
+            $services = $repository->findBy(
+                array('valide' => '1'),
+                array('nom' => 'ASC'),
+            );
+            $serviceProposed = $prestataire->getServices();
+            if(gettype($serviceProposed) != "array") $serviceProposed = [];
+            $servicesleft = array_diff($serviceProposed, $services);
+
+            $form = $this->createForm(AddServiceType::class, $prestataire);
+        }
+        else{
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('user/gestion_category.html.twig', [
+            'form' => $form->createView(),
+            'servicesProposed' => $prestataire->getServices(),
+            'serviceLeft' => $servicesleft
         ]);
     }
 }
