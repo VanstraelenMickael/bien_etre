@@ -1,3 +1,31 @@
+.prestataire_panel {
+  border-top: 1px solid $main-color;
+  margin-top: 15px;
+  padding-top: 10px;
+  width: 100%;
+}
+
+.prestataire_panel h3,
+.user_panel h3 {
+  font-family: "Bebas Neue";
+  @include title-size-bebas;
+  margin-bottom: 10px;
+}
+
 #update_informations .btn_primary {
   width: 30%;
+}
+
+.notice {
+  margin-top: 15px;
+  font-style: italic;
+  @include notice;
+}
+
+.notice a {
+  border-bottom: 1px solid $main-color;
+}
+
+#gestion_category {
+  margin-bottom: 200px;
 }

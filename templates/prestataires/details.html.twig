@@ -122,10 +122,12 @@
         <div class="services">
             {% if prestataire.services %}
                 {% for service in prestataire.services %}
+                {% if service.valide %}
                 <article>
                     <figure></figure>
                     <p><a href="{{path('services', {id: service.id})}}">{{service.nom}}</a></p>
                 </article>
+                {% endif %}
                 {% endfor %}
                 {% else %}
                 <p>Pas de service proposé pour l'instant</p>
