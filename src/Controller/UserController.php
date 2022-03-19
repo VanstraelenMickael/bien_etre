@@ -7,6 +7,7 @@ use App\Entity\Images;
 use App\Form\AddServiceType;
 use App\Form\InternauteType;
 use App\Form\PrestataireType;
+use App\Form\ServicesType;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -122,26 +123,112 @@ class UserController extends AbstractController
     public function gestion_category(Request $request, EntityManagerInterface $entityManager): Response
     {
         if($this->getUser() && $this->getUser()->getPrestataire()){
+            
+            // Récupérer la catégorie et l'ajouter au prestataire
+            $categoryToAdd = $request->request->get('service') ? $request->request->get('service') : "none";
+
             $prestataire = $this->getUser()->getPrestataire();
+
             $repository = $entityManager->getRepository(CategorieDeServices::class);
             $services = $repository->findBy(
                 array('valide' => '1'),
                 array('nom' => 'ASC'),
             );
-            $serviceProposed = $prestataire->getServices();
-            if(gettype($serviceProposed) != "array") $serviceProposed = [];
-            $servicesleft = array_diff($serviceProposed, $services);
 
-            $form = $this->createForm(AddServiceType::class, $prestataire);
+            $toAdd = null;
+            if($categoryToAdd != "none"){
+                $toAdd = $repository->find($categoryToAdd);
+                $prestataire->addService($toAdd);
+                $entityManager->persist($prestataire);
+                $entityManager->flush();
+            }
+
+            $serviceProposed = $prestataire->getServices();
+
+            $serviceProposedArray = [];
+            foreach($serviceProposed as $service){
+                $serviceProposedArray[] = $service;
+            }
+
+            $servicesleft = array_diff($services, $serviceProposedArray);
+
+            if($toAdd != null){
+                $servicesleft = array_diff($servicesleft, [$toAdd]);
+            }
+            
+            
         }
         else{
             return $this->redirectToRoute('home');
         }
 
         return $this->render('user/gestion_category.html.twig', [
-            'form' => $form->createView(),
             'servicesProposed' => $prestataire->getServices(),
-            'serviceLeft' => $servicesleft
+            'servicesLeft' => $servicesleft
         ]);
     }
+
+    /**
+     * @Route("/me/category/remove/{id}", name="remove_category")
+     */
+    public function remove_category(Request $request, EntityManagerInterface $entityManager, CategorieDeServices $service)
+    {
+        if($this->getUser() && $this->getUser()->getPrestataire()){
+            
+            $prestataire = $this->getUser()->getPrestataire();
+            $prestataire->removeService($service);
+            $entityManager->persist($prestataire);
+            $entityManager->flush();
+        }
+        else{
+            return $this->redirectToRoute('home');
+        }
+        return $this->redirectToRoute('my_categories');
+    }
+
+    /**
+     * @Route("/me/category/create", name="create_category")
+     */
+    public function create_category(Request $request, EntityManagerInterface $entityManager): Response
+    {   
+        if($this->getUser() && $this->getUser()->getPrestataire()){
+
+        $category = new CategorieDeServices();
+        $prestataire = $this->getUser()->getPrestataire();
+        $form = $this->createForm(ServicesType::class, $category);
+        $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $banner = $form->get('banner')->getViewData();
+
+                $nom_banner = md5(uniqid()).'.'.$banner->guessExtension();
+
+                $banner->move(
+                    $this->getParameter('category_directory'), $nom_banner
+                );
+
+                $banner_img = new Images();
+                $banner_img->setImage($nom_banner);
+                $banner_img->setOrdre(0);
+                $banner_img->setCategorie($category);
+
+                $prestataire->addService($category);
+
+                $entityManager->persist($category);
+                $entityManager->persist($prestataire);
+                $entityManager->persist($banner_img);
+                $entityManager->flush();
+
+                $this->addFlash('success', 'La catégorie est désormais en attente de validation.');
+                return $this->redirectToRoute('my_categories');
+            }
+        }else{
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('user/create_category.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
+
 }

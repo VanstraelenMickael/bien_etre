@@ -15,3 +15,17 @@
 #update_informations .btn_primary {
   width: 30%;
 }
+
+.notice {
+  margin-top: 15px;
+  font-style: italic;
+  @include notice;
+}
+
+.notice a {
+  border-bottom: 1px solid $main-color;
+}
+
+#gestion_category {
+  margin-bottom: 200px;
+}

@@ -145,8 +145,9 @@ class Prestataire
 
     public function removeService(CategorieDeServices $service): self
     {
-        $this->services->removeElement($service);
-
+        if($this->services->contains($service)){
+            $this->services->removeElement($service);
+        }
         return $this;
     }
 

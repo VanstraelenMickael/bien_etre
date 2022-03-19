@@ -12449,13 +12449,13 @@ a:hover {
 }
 
 .title_category {
-  font-size: 20px;
+  font-size: 40px;
   font-family: "Bebas Neue";
 }
 
 @media (min-width: 576px) {
   .title_category {
-    font-size: 28px;
+    font-size: 38px;
   }
 }
 
@@ -12476,13 +12476,13 @@ a:hover {
 
 .body_container .container h2 {
   color: #38B972;
-  font-size: 20px;
+  font-size: 40px;
   margin-bottom: 25px;
 }
 
 @media (min-width: 576px) {
   .body_container .container h2 {
-    font-size: 28px;
+    font-size: 38px;
   }
 }
 
@@ -13079,13 +13079,13 @@ aside .categorie a:hover {
 }
 
 .services_infos h1 {
-  font-size: 20px;
+  font-size: 40px;
   font-family: "Bebas Neue";
 }
 
 @media (min-width: 576px) {
   .services_infos h1 {
-    font-size: 28px;
+    font-size: 38px;
   }
 }
 
@@ -13116,7 +13116,7 @@ aside .categorie a:hover {
 @media (min-width: 576px) {
   .prestataire_panel h3,
   .user_panel h3 {
-    font-size: 20px;
+    font-size: 25px;
   }
 }
 
@@ -13129,5 +13129,31 @@ aside .categorie a:hover {
 
 #update_informations .btn_primary {
   width: 30%;
+}
+
+.notice {
+  margin-top: 15px;
+  font-style: italic;
+  font-size: 14px;
+}
+
+@media (min-width: 576px) {
+  .notice {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1080px) {
+  .notice {
+    font-size: 14px;
+  }
+}
+
+.notice a {
+  border-bottom: 1px solid #38B972;
+}
+
+#gestion_category {
+  margin-bottom: 200px;
 }
 /*# sourceMappingURL=main.css.map */

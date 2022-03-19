@@ -5,8 +5,53 @@
 
 {% block body %}
 <div class="container" id="gestion_category">
-<h2 class="title_category">Mes services</h2>
-<h2 class="title_category">Ajouter un service</h2>
-{{form}}
+    <h2 class="title_category">Mes services</h2>
+    <div class="table-responsive">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Validation</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for service in servicesProposed %}
+                    <tr>
+                        <td>{{service.nom}}</td>
+                        <td>
+                        {% if service.valide %}
+                        Validé
+                        {% else %}
+                        En attente
+                        {% endif %}
+                        </td>
+                        <td><a href="{{path('remove_category',{id : service.id})}}"><i class="fa fa-trash" aria-hidden="true"></i></a><td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    <h2 class="title_category">Ajouter un service</h2>
+    <form method="post" action="{{path('my_categories')}}">
+        <div class="form-group">
+        <div class="row">
+            <div class="col-12 col-md-6 col-lg-4">
+                <label>
+                <select name="service" class="form-select">
+                <option value="none">Sélectionnez un service</option>
+                {% for service in servicesLeft %}
+                <option value="{{service.id}}">{{service.nom}}</option>
+                {% endfor %}
+                </select>
+                </label>
+            </div>
+            <div class="col-12 col-md-6 col-lg-3">
+                <button type="submit" class="btn_primary">Ajouter</button>
+            </div>
+        </div>
+        </div>
+    </form>
+    <p class="notice">Vous ne trouvez pas la catégorie de service qui vous convient? <a href="{{path('create_category')}}">Proposez en une.</a></p>
 </div>
 {% endblock %}
