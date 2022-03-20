@@ -22,6 +22,7 @@ class AppFixtures extends Fixture
         LocaliteFactory::createMany(30);
 
         CategorieDeServicesFactory::createMany(30);
+        $manager->flush();
         PrestataireFactory::createMany(50);
         InternauteFactory::createMany(50);
         

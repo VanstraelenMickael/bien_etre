@@ -136,6 +136,32 @@ class RegistrationController extends AbstractController
             if($newsletter != 1) $newsletter = 0;
             $internaute->setNewsletter($newsletter);
 
+            $avatar = $formInternaute->get('avatar')->getViewData();
+            if(gettype($avatar) != "string"){
+                $nom_avatar = md5(uniqid()).'.'.$avatar->guessExtension();
+
+                $avatar->move(
+                    $this->getParameter('images_directory'), $nom_avatar
+                );
+
+                $logo_img = new Images();
+                $logo_img->setImage($nom_avatar);
+                $logo_img->setOrdre(0);
+                $logo_img->setInternaute($internaute);
+
+                $old_avatar = "";
+                foreach($internaute->getImages() as $img){
+                    if($img->getOrdre() == 0){
+                        $old_avatar = $img;
+                    }
+                }
+
+                if($old_avatar != ""){
+                    $internaute->removeImage($old_avatar);
+                }
+                $internaute->addImage($logo_img);
+            }
+
             $repository = $entityManager->getRepository(User::class);
             $user = $repository->find($this->getUser()->getId());
             $user->setInternaute($internaute);
