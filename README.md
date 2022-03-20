@@ -12,23 +12,20 @@ Projet du cours "Projet web dynamique".
 
 `composer install`
 
-### 3. Créer la base de donnée
-
-`php bin/console doctrine:database:create`
-
-### 4. Configurer le .env
+### 3. Configurer le .env
 
 Vous devez configurer votre base de donnée (que vous venez de créer) et votre Mailer_DSN
 
-### 5. Setup la base de donnée
+### 4. Setup la base de donnée
 
+`php bin/console doctrine:database:create`
 `php bin/console doctrine:migrations:migrate`
 
-### 6. Créer les données de base
+### 5. Créer les données de base
 
 `php bin/console doctrine:fixtures:load`
 
-### 7. Accéder au site
+### 6. Accéder au site
 
 `symfony server:start`
 Navigate to http://localhost:8000/
