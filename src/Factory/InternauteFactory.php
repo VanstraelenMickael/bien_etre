@@ -42,6 +42,7 @@ final class InternauteFactory extends ModelFactory
             'nom' => self::faker()->lastname(),
             'prenom' => self::faker()->firstname(),
             'newsletter' => self::faker()->boolean(),
+            'user' => UserFactory::createOne()
         ];
     }
 
