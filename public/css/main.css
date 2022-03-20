@@ -12710,6 +12710,15 @@ aside .categorie a:hover {
   transition: 0.4s;
 }
 
+.avatar img {
+  width: 100%;
+}
+
+.avatar figure {
+  max-height: 150px;
+  overflow: hidden;
+}
+
 @media (min-width: 768px) {
   aside {
     position: unset;

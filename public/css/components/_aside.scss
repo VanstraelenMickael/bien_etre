@@ -1,55 +1,64 @@
-aside{
-    position : fixed;
-    top: 0px;
-    right: -100%;
-    width: 0%;
-    margin-bottom: 100px;
-    background-color: white;
-    overflow-y:scroll;
-    overflow-x:hidden;
-    transition: 0.4s;
-    z-index: 65;
+aside {
+  position: fixed;
+  top: 0px;
+  right: -100%;
+  width: 0%;
+  margin-bottom: 100px;
+  background-color: white;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  transition: 0.4s;
+  z-index: 65;
 }
 
-aside:first-child{
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+aside:first-child {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
-aside h2{
-    position: relative;
-    background-color: $main-color;
-    padding: 20px 0px;
-    text-align: center;
-    color: $secondary;
-    font-family: $title;
-    text-transform: uppercase;
+aside h2 {
+  position: relative;
+  background-color: $main-color;
+  padding: 20px 0px;
+  text-align: center;
+  color: $secondary;
+  font-family: $title;
+  text-transform: uppercase;
 }
 
-aside .categorie{
-    display: block;
-    width: 100%;
+aside .categorie {
+  display: block;
+  width: 100%;
 }
 
-aside .categorie a{
-    padding: 10px 10px;
-    display:block;
-    transition: 0.4s;
+aside .categorie a {
+  padding: 10px 10px;
+  display: block;
+  transition: 0.4s;
 }
 
-aside .categorie a:hover{
-    padding-left: 15px;;
+aside .categorie a:hover {
+  padding-left: 15px;
 }
 
-.icon{
-    transition: 0.4s;
+.icon {
+  transition: 0.4s;
 }
 
-@media (min-width: 768px){
-    aside{
-        position : unset;
-        right: unset;
-        width: unset;
-        overflow-y:hidden;
-    }
+.avatar img {
+  width: 100%;
+}
+
+.avatar figure {
+  max-height: 150px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  aside {
+    position: unset;
+    right: unset;
+    width: unset;
+    overflow-y: hidden;
+  }
 }

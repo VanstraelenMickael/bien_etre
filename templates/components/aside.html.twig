@@ -5,8 +5,25 @@
                                 <div class="user_panel">
                                     <h3>Menu</h3>
                                     <div class="row">
-                                    <a class="col-12 col-md-6" href="{{path('me')}}">Mon profil</a>
-                                    <a class="col-12 col-md-6" href="{{path('app_logout')}}"><p>Se déconnecter</p></a>
+                                    <div class="col-6">
+                                        <div class="avatar">
+                                            <figure>
+                                                <img src="
+                                                {% if app.user.prestataire %}
+                                                {{app.user.prestataire.logo.slug}}
+                                                {% else %}
+                                                {{app.user.internaute.avatar.slug}}
+                                                {% endif %}
+                                                ">
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                    <div class="row">
+                                    <a class="col-12" href="{{path('me')}}">Mon profil</a>
+                                    <a class="col-12" href="{{path('app_logout')}}"><p>Se déconnecter</p></a>
+                                    </div>
+                                    </div>
                                     </div>
                                 </div>
                                 {% if app.user.prestataire %}
