@@ -85,7 +85,7 @@ class PrestataireRepository extends ServiceEntityRepository
             }
             
             $qb ->setParameter('nom', '%'.$nom.'%')
-                ->setMaxResults(20);
+                ;
 
             if($codePostal != "none"){
                 $qb ->andWhere('u.codePostal = :cp')

@@ -23,6 +23,7 @@ class CategorieDeServicesRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('p')
             ->orderBy('p.id', 'DESC')
+            ->where('p.valide = 1')
             ->setMaxResults(1)
             ->getQuery()
             ->getResult()
