@@ -63,7 +63,7 @@ final class UserFactory extends ModelFactory
             'adresse' => self::faker()->streetName(),
             'adresseNum' => self::faker()->buildingNumber(),
             'inscription' => new DateTime(),
-            'typeUtilisateur' => 'Prest'
+            'typeUtilisateur' => 'Prest',
         ];
     }
 
