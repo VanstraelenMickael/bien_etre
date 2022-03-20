@@ -14,7 +14,7 @@ Projet du cours "Projet web dynamique".
 
 ### 3. Configurer le .env
 
-Vous devez configurer votre base de donnée et votre Mailer_DSN
+Vous devez configurer votre base de donnée (que vous venez de créer) et votre Mailer_DSN
 
 ### 4. Setup la base de donnée
 
