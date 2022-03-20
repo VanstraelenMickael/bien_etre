@@ -138,11 +138,11 @@ class UserController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
+        }
         return $this->render('user/index.html.twig', [
             'form' => $form->createView(),
             'role' => $role
         ]);
-        }
     }
 
     /**

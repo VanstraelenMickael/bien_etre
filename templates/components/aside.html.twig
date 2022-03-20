@@ -9,10 +9,12 @@
                                         <div class="avatar">
                                             <figure>
                                                 <img src="
-                                                {% if app.user.prestataire %}
+                                                {% if app.user.prestataire and app.user.prestataire.logo %}
                                                 {{app.user.prestataire.logo.slug}}
-                                                {% else %}
+                                                {% elseif app.user.internaute and app.user.internaute.avatar %}
                                                 {{app.user.internaute.avatar.slug}}
+                                                {% else %}
+                                                /img/users/default.png
                                                 {% endif %}
                                                 ">
                                             </figure>

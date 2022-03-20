@@ -55,7 +55,7 @@ final class PromotionFactory extends ModelFactory
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'nom' => self::faker()->company(),
             'description' => self::faker()->text(60),
-            'documentPdf' => new BinaryFileResponse($this->controller->getParameter('kernel.project_dir')."/public/assets/doc.pdf"),
+            'documentPdf' => "e",
             'debut' => $depart,
             'fin' => $fin,
             'affichageDe' => $debutAffichage->setTimestamp($depart->getTimestamp() - (rand(7,60) * 86400)),

@@ -56,7 +56,6 @@ final class UserFactory extends ModelFactory
 
     protected function getDefaults(): array
     {
-        $internaute = InternauteFactory::createOne();
         return [
             // TODO add your default values here (https://symfony.com/bundles/ZenstruckFoundryBundle/current/index.html#model-factories)
             'email' => self::faker()->email(),
@@ -65,7 +64,6 @@ final class UserFactory extends ModelFactory
             'adresseNum' => self::faker()->buildingNumber(),
             'inscription' => new DateTime(),
             'typeUtilisateur' => 'Prest',
-            'internaute' => $internaute
         ];
     }
 
@@ -95,8 +93,6 @@ final class UserFactory extends ModelFactory
                 $user->setCodePostal($cp);
                 $user->setCommune($cm);
                 $user->setLocalite($lo);
-                $internaute = $user->getInternaute();
-                $internaute->setUser($user);
                 //$this->passwordHasher->hashpassword($this->user, "test"),
             })
         ;
