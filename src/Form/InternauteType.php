@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Internaute;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
@@ -30,6 +31,14 @@ class InternauteType extends AbstractType
             'attr' => ['class' => 'form-check-input'],
             'mapped' => false,
             'required' => false
+        ])
+        ->add('avatar', FileType::class, [
+            'label' => "Votre avatar",
+            'multiple' => false,
+            'mapped' => false,
+            'required' => false,
+            'attr' => ['class' => 'form-control'],
+            'row_attr' => ['class' => 'form-group col-12 col-sm-12 col-lg-5 col-xl-5']
         ])
         ;
     }

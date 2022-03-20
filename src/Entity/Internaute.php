@@ -132,4 +132,12 @@ class Internaute
 
         return $this;
     }
+
+    public function getAvatar(){
+        foreach($this->getImages() as $img){
+            if($img->getOrdre() == 0){
+                return $img;
+            }
+        }
+    }
 }
